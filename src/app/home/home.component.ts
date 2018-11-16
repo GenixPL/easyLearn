@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SetsMenuComponent } from '../sets-menu/sets-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   title = 'easyLearn';
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
+
+  moveToSetsMenu() {
+    this.router.navigate(["sets-menu"]);
+  }
+
 }
