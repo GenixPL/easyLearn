@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  moveToSetsMenu() {
+  moveToSetsMenuComponent() {
     this.router.navigate(["sets-menu"]);
   }
 
