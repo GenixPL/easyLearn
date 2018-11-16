@@ -1,7 +1,10 @@
 {
   "name": "easyLearn",
   "nativescript": {
-    "id": "org.nativescript.easyLearn"
+    "id": "org.nativescript.easyLearn",
+    "tns-android": {
+      "version": "5.0.0"
+    }
   },
   "version": "0.0.0",
   "scripts": {
