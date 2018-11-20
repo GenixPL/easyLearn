@@ -1,12 +1,20 @@
-<StackLayout>
-    <Label text="Set name: {{newSetName}}" textWrap="true"></Label>
-    <Label text="First language: {{language1}}" textWrap="true"></Label>
-    <Label text="Second language: {{language2}}" textWrap="true"></Label>
-    
-    
-    <Button text="Change set name" (tap)="changeSetName()"></Button>
-    <Button text="Choose first language" id="1" (tap)="chooseLanguageDialog()"></Button>
 
-    <Button text="Choose second language" id="2" (tap)="chooseLanguageDialog()"></Button>
-    <CheckBox #CB1 text="Add set to your library" checked="false" (tap)="addToLibrary()"></CheckBox>
+<StackLayout>
+
+    <StackLayout orientation="horizontal">
+        <Label text="Set name: {{newSetName}}" textWrap="true"></Label>
+        <Button text="Change set name" (tap)="changeSetNameDialog()"></Button>
+    </StackLayout>
+    
+    <StackLayout orientation="horizontal">
+        <Label text="First language: {{language1}}"></Label>
+        <Button id="1" text="Choose a Language" (tap)="showPicker($event)"></Button>
+    </StackLayout>
+
+    <StackLayout orientation="horizontal">
+            <Label text="Second language: {{language2}}"></Label>
+            <Button id="2" text="Choose a Language" (tap)="showPicker($event)"></Button>
+    </StackLayout>
+    
 </StackLayout>
+<FilterableListpicker class="flp-container" #myfilter blur="light" hintText="Type to filter..." [source]="listitems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>

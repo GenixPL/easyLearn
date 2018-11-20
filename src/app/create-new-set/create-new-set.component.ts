@@ -1,13 +1,15 @@
 import { Component, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
-import { Page } from 'ui/page';
+import { Page, EventData } from 'ui/page';
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 import * as Toast from 'nativescript-toast';
 import { prompt, PromptResult, inputType, PromptOptions } from "tns-core-modules/ui/dialogs";
-import * as dialogs from "tns-core-modules/ui/dialogs";
+import { registerElement } from "nativescript-angular/element-registry";
+import { Button } from "tns-core-modules/ui/button";
+
+registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
 
 @NgModule({
   imports: [TNSCheckBoxModule],
-  // etc.
 })
 export class YourModule {}
 
@@ -19,11 +21,23 @@ export class YourModule {}
 export class CreateNewSetComponent implements OnInit {
 
   @ViewChild('CB1') check_box_add_to_library: ElementRef;
+  @ViewChild('myfilter') myfilter: ElementRef;
 
   addToLibrary:boolean = false;
   newSetName: string = "set name";
   language1: string;
   language2: string;
+  listitems = [
+    {
+      "title":"EN",
+      "description": "English"
+    }, 
+    {
+      "title":"DE",
+      "description": "German"
+    },
+  ];
+  lastLanguage: string;
 
   constructor(private page:Page) {
     page.actionBarHidden = true;
@@ -50,6 +64,27 @@ export class CreateNewSetComponent implements OnInit {
     prompt(options).then((result: PromptResult) => {
       this.newSetName = result.text;
     });
+  }
+
+  
+
+  cancelFilterableList() {
+    console.log('canceled');
+  }
+
+  itemTapped(args) {
+    if (this.lastLanguage == "1") {
+      this.language1 = args.selectedItem.title;
+    } else {
+      this.language2 = args.selectedItem.title;
+    }
+  }
+
+  showPicker(event: EventData) {
+    this.myfilter.nativeElement.show();
+
+    let btn =  event.object as Button;
+    this.lastLanguage = btn.id;
   }
 
 }

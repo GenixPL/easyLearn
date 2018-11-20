@@ -20,4 +20,8 @@ export class SetsMenuComponent implements OnInit {
     this.router.navigate(["home"]);
   }
 
+  moveToCreateNewSetComponent() {
+    this.router.navigate(["create-new-set"]);
+  }
+
 }
