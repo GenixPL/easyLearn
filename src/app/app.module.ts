@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SetsMenuComponent } from './sets-menu/sets-menu.component';
+import { CreateNewSetComponent } from './create-new-set/create-new-set.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { SetsMenuComponent } from './sets-menu/sets-menu.component';
     AppComponent,
     HomeComponent,
     SetsMenuComponent,
+    CreateNewSetComponent,
   ],
   imports: [
     BrowserModule,
