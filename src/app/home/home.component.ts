@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SetsMenuComponent } from '../sets-menu/sets-menu.component';
 import { Page } from 'ui/page';
  
 @Component({

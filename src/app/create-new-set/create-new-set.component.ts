@@ -6,6 +6,8 @@ import { prompt, PromptResult, inputType, PromptOptions } from "tns-core-modules
 import { registerElement } from "nativescript-angular/element-registry";
 import { Button } from "tns-core-modules/ui/button";
 
+import { addNewSet } from '../helping-classes/file-operater.tns'
+
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
 
 @NgModule({
@@ -24,7 +26,7 @@ export class CreateNewSetComponent implements OnInit {
   @ViewChild('myfilter') myfilter: ElementRef;
 
   addToLibrary:boolean = false;
-  newSetName: string = "set name";
+  newSetName: string = "set-name";
   language1: string;
   language2: string;
   listitems = [
@@ -69,7 +71,7 @@ export class CreateNewSetComponent implements OnInit {
   
 
   cancelFilterableList() {
-    console.log('canceled');
+    this.lastLanguage = "";
   }
 
   itemTapped(args) {
@@ -83,8 +85,20 @@ export class CreateNewSetComponent implements OnInit {
   showPicker(event: EventData) {
     this.myfilter.nativeElement.show();
 
-    let btn =  event.object as Button;
+    let btn = <Button>event.object
     this.lastLanguage = btn.id;
   }
 
+  saveSet() {
+    let newSet = `{"setname": "${this.newSetName}", "firstLanguage": "${this.language1}", "secondLanguage": "${this.language2}"}`;
+
+    addNewSet(this.newSetName, JSON.parse(newSet));
+  }
+
+}
+
+export interface jsonSet {
+  "setname": string;
+  "firstLanguage": string;
+  "secondLanguage": string;
 }
