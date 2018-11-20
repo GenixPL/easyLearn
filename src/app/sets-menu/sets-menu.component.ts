@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Page } from 'ui/page';
 
 @Component({
   selector: 'app-sets-menu',
@@ -8,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class SetsMenuComponent implements OnInit {
 
-  constructor(private router:Router) { 
-
+  constructor(private router:Router, private page:Page) { 
+    page.actionBarHidden = true;
   }
 
   ngOnInit() {
