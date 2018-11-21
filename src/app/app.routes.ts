@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SetsMenuComponent } from './sets-menu/sets-menu.component';
 import { CreateNewSetComponent } from './create-new-set/create-new-set.component';
+import { SetsOnDeviceComponent } from './sets-on-device/sets-on-device.component';
 
 export const routes: Routes = [
   {
@@ -22,10 +23,15 @@ export const routes: Routes = [
       path: 'create-new-set',
       component: CreateNewSetComponent
   },
+  {
+	  path: 'sets-on-device',
+	  component: SetsOnDeviceComponent
+  },
 ];
 
 export const components: any = [
     HomeComponent,
     SetsMenuComponent,
-    CreateNewSetComponent
+	CreateNewSetComponent,
+	SetsOnDeviceComponent
 ];
