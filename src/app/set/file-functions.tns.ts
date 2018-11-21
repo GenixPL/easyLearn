@@ -1,8 +1,7 @@
-import { knownFolders, Folder, File } from "tns-core-modules/file-system";
-
-import { Set } from './set';
+import { knownFolders, Folder, File, FileSystemEntity } from 'tns-core-modules/file-system';
 
 
+export const setsFolderName: string = `setsFolder`;
 const TAG: string = `file-functions.tns.ts`;
 
 
@@ -14,7 +13,7 @@ export function addNewJSONFile(fileName: string, fileContent: string) {
 	}
 
     const documents: Folder = <Folder>knownFolders.documents();
-    const folder: Folder = <Folder>documents.getFolder("setsFolder");
+    const folder: Folder = <Folder>documents.getFolder(setsFolderName);
     const file: File = <File>folder.getFile(fileName + `.json`);
 
         file.writeText(fileContent || "some random content")
@@ -29,3 +28,24 @@ export function addNewJSONFile(fileName: string, fileContent: string) {
             console.log(err);
         });
 }
+
+export function getSetsFiles() {
+
+	let array: any;
+	let arrayOfSets: Array<string> = new Array(0);
+
+	console.time("reading");
+	const documents: Folder = <Folder>knownFolders.documents();
+	const folder: Folder = <Folder>documents.getFolder(setsFolderName);
+	console.timeEnd("reading");
+
+	console.time("taking out");
+	array = folder.getEntitiesSync();
+	array.forEach(element => {
+		arrayOfSets.push(<string>element.name);
+	});
+	console.timeEnd("taking out");
+
+	return arrayOfSets;
+}
+
