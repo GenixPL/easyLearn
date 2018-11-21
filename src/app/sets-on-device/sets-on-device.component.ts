@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 @Component({
   selector: 'app-sets-on-device',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetsOnDeviceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private page:Page) {
+	  page.actionBarHidden = true;
+   }
 
   ngOnInit() {
   }
