@@ -18,6 +18,5 @@
     
     <Button text="Save set" (tap)="saveSet()"></Button>
     
-
 </StackLayout>
-<FilterableListpicker class="flp-container" #myfilter blur="light" hintText="Type to filter..." [source]="listitems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>
+<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listitems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>

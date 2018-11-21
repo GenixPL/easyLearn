@@ -6,20 +6,26 @@ import { prompt, PromptResult, inputType, PromptOptions } from "tns-core-modules
 import { registerElement } from "nativescript-angular/element-registry";
 import { Button } from "tns-core-modules/ui/button";
 
-import { addNewSet } from '../helping-classes/file-operater.tns'
+import { addNewJSONFile } from '../set/file-functions.tns';
+import { Set } from '../set/set';
+
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
+
 
 @NgModule({
   imports: [TNSCheckBoxModule],
 })
 export class YourModule {}
 
+
 @Component({
   selector: 'app-create-new-set',
   templateUrl: './create-new-set.component.html',
   styleUrls: ['./create-new-set.component.css']
 })
+
+
 export class CreateNewSetComponent implements OnInit {
 
   @ViewChild('CB1') check_box_add_to_library: ElementRef;
@@ -90,15 +96,10 @@ export class CreateNewSetComponent implements OnInit {
   }
 
   saveSet() {
-    let newSet = `{"setname": "${this.newSetName}", "firstLanguage": "${this.language1}", "secondLanguage": "${this.language2}"}`;
+    let newSet: Set = new Set(this.newSetName, this.language1, this.language2);
 
-    addNewSet(this.newSetName, JSON.parse(newSet));
+    addNewJSONFile(this.newSetName, newSet.getJSONString());
   }
-
 }
 
-export interface jsonSet {
-  "setname": string;
-  "firstLanguage": string;
-  "secondLanguage": string;
-}
+// TODO: check correctness of data to save
