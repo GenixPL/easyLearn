@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
 import { Page, EventData } from 'tns-core-modules/ui/page/page';
-import { ListView, ItemEventData } from "tns-core-modules/ui/list-view";
-import { Image } from "tns-core-modules/ui/image";
-import { from } from 'rxjs';
+import { ListView} from "tns-core-modules/ui/list-view";
 
 
 import { getSetsFiles, deleteSet } from '../set/file-functions.tns';
 import { Router } from '@angular/router';
-import { ButtonImageComponent } from '../ui/btn-img/btn-img.component';
 import { Button } from 'tns-core-modules/ui/button/button';
 
 @Component({
