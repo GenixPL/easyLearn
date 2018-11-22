@@ -5,6 +5,7 @@ import * as Toast from 'nativescript-toast';
 import { prompt, PromptResult, inputType, PromptOptions } from "tns-core-modules/ui/dialogs";
 import { registerElement } from "nativescript-angular/element-registry";
 import { Button } from "tns-core-modules/ui/button";
+import { topmost } from "tns-core-modules/ui/frame";
 
 import { addNewJSONFile } from '../set/file-functions.tns';
 import { Set } from '../set/set';
@@ -97,8 +98,9 @@ export class CreateNewSetComponent implements OnInit {
 
   saveSet() {
     let newSet: Set = new Set(this.newSetName, this.language1, this.language2);
-
-    addNewJSONFile(this.newSetName, newSet.getJSONString());
+	addNewJSONFile(this.newSetName, newSet.getJSONString());
+	
+	topmost().goBack();
   }
 }
 

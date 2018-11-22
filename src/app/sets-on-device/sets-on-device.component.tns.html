@@ -1,3 +1,14 @@
 <StackLayout>
-	
+
+	<ListView [items]="filesArray" class="list-group" id="listView_sets">
+		<ng-template let-item="item" let-odd="odd" let-even="even">
+		  <StackLayout>
+			<Label [text]="item" class="list-group-item"></Label>
+			
+		  </StackLayout>
+		</ng-template>
+	</ListView>
+
+	<Button text="Create new set" (tap)="moveToCreateNewSetComponent()"></Button>
+
 </StackLayout>
