@@ -1,11 +1,11 @@
 <StackLayout>
 
 	<ListView [items]="filesArray" class="list-group" id="listView_sets">
-		<ng-template let-item="item" let-odd="odd" let-even="even">
-		  <StackLayout>
-			<Label [text]="item" class="list-group-item"></Label>
-			
-		  </StackLayout>
+		<ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+			<GridLayout rows="auto" columns="*,auto">
+				<Label [text]="item" class="list-group-item" row="0" col="0"></Label>
+				<Button [id]="i" (tap)="deleteSet($event)" row="0" col="1" horizontalAlignment="right" class="first"></Button>
+			</GridLayout>
 		</ng-template>
 	</ListView>
 

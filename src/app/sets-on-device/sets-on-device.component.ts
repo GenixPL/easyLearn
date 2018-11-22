@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
-import { Page } from 'tns-core-modules/ui/page/page';
-import { ListView } from "tns-core-modules/ui/list-view";
+import { Page, EventData } from 'tns-core-modules/ui/page/page';
+import { ListView, ItemEventData } from "tns-core-modules/ui/list-view";
+import { Image } from "tns-core-modules/ui/image";
+import { from } from 'rxjs';
 
 
-import { getSetsFiles } from '../set/file-functions.tns';
+import { getSetsFiles, deleteSet } from '../set/file-functions.tns';
 import { Router } from '@angular/router';
-
+import { ButtonImageComponent } from '../ui/btn-img/btn-img.component';
+import { Button } from 'tns-core-modules/ui/button/button';
 
 @Component({
   selector: 'app-sets-on-device',
@@ -31,7 +34,6 @@ export class SetsOnDeviceComponent implements OnInit {
 
 		this.page.on("navigatingTo", () => {
 			//this is executed after navigating back to this page
-			this.getSets();
 			this.refresh();
         });
 	}
@@ -41,6 +43,7 @@ export class SetsOnDeviceComponent implements OnInit {
 	}
 
 	refresh(){
+		this.getSets();
         this.listView_sets = <ListView>this.page.getViewById("listView_sets");
         this.listView_sets.refresh();
 	}
@@ -52,5 +55,14 @@ export class SetsOnDeviceComponent implements OnInit {
 		for (let i = 0; i < this.filesArray.length; i++) {
 			this.filesArray[i] = this.filesArray[i].replace(re, ``);
 		}
+	}
+
+	deleteSet(event: EventData) {
+		let btn = <Button>event.object;
+
+		let setName: string = this.filesArray[btn.id + 0]; //"+0" coverts this id to number
+		deleteSet(setName);
+		
+		this.refresh();
 	}
 }

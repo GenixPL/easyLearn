@@ -35,3 +35,14 @@ export function getSetsFiles() {
 	return arrayOfSets;
 }
 
+export function deleteSet(setName: string) {
+	const fileName: string = `${setName}.json`;
+
+	const documents: Folder = <Folder>knownFolders.documents();
+	const folder: Folder = <Folder>documents.getFolder(setsFolderName);
+	const file: File = <File>folder.getFile(fileName);
+
+	file.removeSync((err) => { console.log(`Error during file removal: ${err}`); });
+	console.log("set deleted"); //TODO: we may output this even after error
+								//TODO: we should change all sync methods into async
+}

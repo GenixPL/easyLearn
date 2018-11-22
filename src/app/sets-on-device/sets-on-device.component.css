@@ -1,0 +1,21 @@
+ListView {
+	color: blueviolet;
+	background-color: aquamarine;
+}
+
+Label {
+	background-color: blanchedalmond;
+}
+
+Button.first {
+	background-image: url("~/images/trash-icon.png") no-repeat;
+	cursor:pointer;
+    border:none;
+    width:100px;
+	height:100px;
+	margin-right: 20px;
+}
+
+/* button.second {
+	...
+} */
