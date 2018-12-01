@@ -25,7 +25,11 @@ export class SetsMenuComponent implements OnInit {
   }
 
   moveToSetsOnDeviceComponent() {
-	  this.router.navigate(["sets-on-device"]);
+	this.router.navigate(["sets-on-device"]);
+  }
+
+  moveToMarketComponent() {
+	this.router.navigate(["market"]);
   }
 
 }

@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { SetsMenuComponent } from './sets-menu/sets-menu.component';
 import { CreateNewSetComponent } from './create-new-set/create-new-set.component';
 import { SetsOnDeviceComponent } from './sets-on-device/sets-on-device.component';
+import { MarketComponent } from './market/market.component';
+import { from } from 'rxjs';
 
 export const routes: Routes = [
   {
@@ -27,11 +29,18 @@ export const routes: Routes = [
 	  path: 'sets-on-device',
 	  component: SetsOnDeviceComponent
   },
+
+  {
+	  path: 'market',
+	  component: MarketComponent
+  },
+
 ];
 
 export const components: any = [
     HomeComponent,
     SetsMenuComponent,
 	CreateNewSetComponent,
-	SetsOnDeviceComponent
+	SetsOnDeviceComponent,
+	MarketComponent
 ];
