@@ -9,6 +9,7 @@ android {
   defaultConfig {  
     generatedDensities = []
     applicationId = "com.tempus.easyLearn" 
+	multiDexEnabled true
     
     //override supported platforms
     // ndk {
@@ -20,4 +21,8 @@ android {
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
   }  
-} 
+}
+
+dependencies {
+  compile 'com.android.support:multidex:1.0.3'
+}
