@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import * as firebase from 'nativescript-plugin-firebase';
+import * as firebase from 'nativescript-plugin-firebase/app';
 
 
 firebase
-	.init()
+	.initializeApp({
+		onAuthStateChanged: function(data) {
+			if (data.loggedIn) {
+		  		console.log(`${data.user.email} logged in`);
+			} else {
+				console.log(`${data.user.email} logged out`);
+			}
+		}
+	})
 	.then(() => {
 		console.log('Firebase initialized.');
 	})
