@@ -17,15 +17,12 @@ registerElement("FilterableListpicker", () => require("nativescript-filterable-l
 @NgModule({
   imports: [TNSCheckBoxModule],
 })
-export class YourModule {}
-
 
 @Component({
   selector: 'app-create-new-set',
   templateUrl: './create-new-set.component.html',
   styleUrls: ['./create-new-set.component.css']
 })
-
 
 export class CreateNewSetComponent implements OnInit {
 

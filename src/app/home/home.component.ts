@@ -8,17 +8,20 @@ import { Page } from 'ui/page';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  title = 'easyLearn';
+	title = 'easyLearn';
 
-  constructor(private router:Router, private page:Page) {
-    page.actionBarHidden = true;
-   }
+	constructor(private router:Router, private page:Page) {
+		page.actionBarHidden = true;
+	}
 
-  ngOnInit() {
-  }
+  	ngOnInit() { }
 
-  moveToSetsMenuComponent() {
-    this.router.navigate(["sets-menu"]);
-  }
+  	moveToSetsMenuComponent() {
+	    this.router.navigate(["sets-menu"]);
+	}
+
+  	moveToAuthComponent() {
+		this.router.navigate(["auth"]);
+	}
 
 }
