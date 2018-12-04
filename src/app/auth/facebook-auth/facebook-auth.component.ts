@@ -25,14 +25,12 @@ export class FacebookAuthComponent implements OnInit {
 			  // defaults to ['public_profile', 'email']
 			  scope: ['public_profile', 'email']
 			}
-		  }).then(
-			  function (result) {
-				JSON.stringify(result);
-			  },
-			  function (errorMessage) {
-				console.log(errorMessage);
-			  }
-		  );
+		  	}).then((user) => {
+				JSON.stringify(`User logged in through facebook auth: ${JSON.stringify(user.email)}`);
+
+			}, (err) => {
+				console.log(`Error during facebook auth: ${err}`);
+			});
 	}
 
 }

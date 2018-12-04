@@ -25,6 +25,6 @@ export class GoogleAuthComponent implements OnInit {
 
 		}).catch((err) => {
 			console.log(`Error during google auth: ${err}`);
-		})
+		});
 	}
 }

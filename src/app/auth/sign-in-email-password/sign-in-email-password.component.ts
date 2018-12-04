@@ -13,7 +13,7 @@ import * as Toast from 'nativescript-toast';
 export class SignInEmailPasswordComponent implements OnInit {
 
 	private email: string = "dupa@o2.pl";
-	private password: string = "gfhffgh";
+	private password: string = "asdasdasd";
 
 	constructor(private page:Page) { 
 		page.actionBarHidden = true;
