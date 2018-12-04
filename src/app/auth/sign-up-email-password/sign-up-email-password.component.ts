@@ -28,7 +28,7 @@ export class SignUpEmailPasswordComponent implements OnInit {
 			.auth().createUserWithEmailAndPassword(this.email, this.password)
 			.then((newUser) => {
 				console.log(`User created ${newUser}`);
-				addSetsCollectionForUser(newUser.uid);
+				addSetsCollectionForUser(newUser);
 			})
 			.catch((err) => {
 				let errMassage:string = JSON.stringify(err);
