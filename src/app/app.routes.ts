@@ -10,6 +10,7 @@ import { AuthComponent } from './auth/auth.component';
 import { SignInEmailPasswordComponent } from './auth/sign-in-email-password/sign-in-email-password.component';
 import { SignUpEmailPasswordComponent } from './auth/sign-up-email-password/sign-up-email-password.component';
 import { GoogleAuthComponent } from './auth/google-auth/google-auth.component';
+import { FacebookAuthComponent } from './auth/facebook-auth/facebook-auth.component';
 
 
 export const routes: Routes = [
@@ -54,6 +55,10 @@ export const routes: Routes = [
 		path: 'google-auth',
 		component: GoogleAuthComponent
 	},
+	{
+		path: 'facebook-auth',
+		component: FacebookAuthComponent
+	},
 ];
 
 
@@ -66,5 +71,6 @@ export const components: any = [
 	AuthComponent,
 	SignInEmailPasswordComponent,
 	SignUpEmailPasswordComponent,
-	GoogleAuthComponent
+	GoogleAuthComponent, 
+	FacebookAuthComponent
 ];

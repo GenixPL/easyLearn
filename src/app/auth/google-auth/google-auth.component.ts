@@ -17,13 +17,14 @@ export class GoogleAuthComponent implements OnInit {
 
 	ngOnInit() { }
 
-	onGoogleLogin() {
+	logInWithGoogle() {
 		firebase.login({ //it may not co-work with web 
 			type: firebase.LoginType.GOOGLE,
-		}).then(res => {
-			console.log(JSON.stringify(res));
-		}).catch(err => {
-			console.log(err);
+		}).then((user) => {
+			console.log(`User logged in through google auth: ${JSON.stringify(user.email)}`);
+
+		}).catch((err) => {
+			console.log(`Error during google auth: ${err}`);
 		})
 	}
 }

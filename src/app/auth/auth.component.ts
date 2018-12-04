@@ -29,4 +29,8 @@ export class AuthComponent implements OnInit {
 	moveToGoogleAuthComponent() {
 		this.router.navigate(['google-auth']);
 	}
+
+	moveToFacebookAuthComponent() {
+		this.router.navigate(['facebook-auth']);
+	}
 }
