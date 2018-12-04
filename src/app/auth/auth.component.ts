@@ -53,7 +53,7 @@ export class AuthComponent implements OnInit {
 			console.log(`Current user: ${userInfo}`);
 			
 		} else {
-			Toast.makeText(`Current user is undefined`, `long`).show();
+			Toast.makeText(`Current user is undefined`, `long`).show(); //TODO: sth is wrong and users are not save over sessions
 			console.log(`Current user is undefined`);
 		}
 	}
