@@ -25,4 +25,8 @@ export class AuthComponent implements OnInit {
 	moveToSignUpEmailPasswordComponent() {
 		this.router.navigate(['sign-up-email-password']);
 	}
+
+	moveToGoogleAuthComponent() {
+		this.router.navigate(['google-auth']);
+	}
 }

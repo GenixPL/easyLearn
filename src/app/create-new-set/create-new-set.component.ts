@@ -1,6 +1,5 @@
 import { Component, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
 import { Page, EventData } from 'ui/page';
-import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 import * as Toast from 'nativescript-toast';
 import { prompt, PromptResult, inputType, PromptOptions } from "tns-core-modules/ui/dialogs";
 import { registerElement } from "nativescript-angular/element-registry";
@@ -13,10 +12,6 @@ import { Set } from '../set/set';
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
 
-
-@NgModule({
-  imports: [TNSCheckBoxModule],
-})
 
 @Component({
   selector: 'app-create-new-set',
@@ -71,8 +66,6 @@ export class CreateNewSetComponent implements OnInit {
       this.newSetName = result.text;
     });
   }
-
-  
 
   cancelFilterableList() {
     this.lastLanguage = "";
