@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Page } from 'ui/page';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 @Component({
   selector: 'app-sets-menu',

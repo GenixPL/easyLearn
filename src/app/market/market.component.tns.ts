@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Page } from 'ui/page';
 import * as firebase from 'nativescript-plugin-firebase/app';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class MarketComponent implements OnInit {
   ngOnInit() { }
 
   getDoc() {
-	const Document = firebase.firestore().collection("public-sets").doc("nuZKAj9LHKV07fYAMvLc	");
+	const Document = firebase.firestore().collection("public-sets").doc("nuZKAj9LHKV07fYAMvLc");
 
 	Document.get().then(doc => {
 	  if (doc.exists) {
