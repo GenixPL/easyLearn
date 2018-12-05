@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { from } from 'rxjs';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from '../home/home.component';
 
 
 export const routes: Routes = [

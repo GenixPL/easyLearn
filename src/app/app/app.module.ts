@@ -18,4 +18,5 @@ import { components } from './app.routes';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
