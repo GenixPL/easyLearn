@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
-import { Page, EventData } from 'tns-core-modules/ui/page/page';
-import { ListView, ItemEventData } from "tns-core-modules/ui/list-view";
-import { Image } from "tns-core-modules/ui/image";
-import { from } from 'rxjs';
-
-
-import { getSetsFiles, deleteSet } from '../set/file-functions.tns';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Button } from 'tns-core-modules/ui/button/button';
+import { ListView } from 'tns-core-modules/ui/list-view';
+import { EventData, Page } from 'tns-core-modules/ui/page/page';
+
+import { deleteSet, getSetsFiles } from '../set/file-functions.tns';
+
 
 @Component({
   selector: 'app-sets-on-device',

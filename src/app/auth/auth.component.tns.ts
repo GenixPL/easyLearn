@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Page } from 'ui/page';
-import * as firebase from 'nativescript-plugin-firebase/app';
-import { Router } from '@angular/router';
-import * as Toast from 'nativescript-toast';
-import { User } from 'nativescript-plugin-firebase';
 import { isDefined } from '@angular/compiler/src/util';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import * as firebase from 'nativescript-plugin-firebase/app';
+import * as Toast from 'nativescript-toast';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 
 @Component({

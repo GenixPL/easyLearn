@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Page } from 'ui/page';
 import * as firebase from 'nativescript-plugin-firebase/app';
-import * as Toast from 'nativescript-toast';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 
 @Component({

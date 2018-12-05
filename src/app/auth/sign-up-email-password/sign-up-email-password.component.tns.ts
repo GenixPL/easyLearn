@@ -1,9 +1,9 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { Page } from 'ui/page';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase/app';
 import * as Toast from 'nativescript-toast';
+import { Page } from 'tns-core-modules/ui/page/page';
 
-import { addSetsCollectionForUser } from '../../firebase/firebase-functions'
+import { addSetsCollectionForUser } from '../../firebase/firebase-functions';
 
 
 @Component({
