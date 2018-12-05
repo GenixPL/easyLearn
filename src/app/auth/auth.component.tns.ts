@@ -1,9 +1,10 @@
 import { isDefined } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import * as firebase from 'nativescript-plugin-firebase/app';
+import * as firebase from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
+import { User } from 'nativescript-plugin-firebase';
 
 
 @Component({
@@ -37,23 +38,27 @@ export class AuthComponent implements OnInit {
 	}
 
 	signOut() {
-		firebase.auth().signOut()
-      		.then(() => console.log("Logout OK"))
-      		.catch(error => console.log("Logout error: " + JSON.stringify(error)));
+		firebase.logout()
+      		.then(() => console.log("User logged out"))
+      		.catch(error => console.log("User logging out error: " + JSON.stringify(error)));
 	}
 
 	getCurrentUser() {
-		const user = firebase.auth().currentUser;
+		firebase.getCurrentUser()
+		.then((user) => {
+			if (isDefined(user)) {
+				let userInfo: string = `${user.uid} ${user.email}`;
 
-		if (isDefined(user)) {
-			let userInfo: string = `${user.uid} ${user.email}`;
-
-			Toast.makeText(`Current user: ${userInfo}`, `long`).show();
-			console.log(`Current user: ${userInfo}`);
+				Toast.makeText(`Current user: ${userInfo}`, `long`).show();
+				console.log(`Current user: ${userInfo}`);
 			
-		} else {
-			Toast.makeText(`Current user is undefined`, `long`).show(); //TODO: sth is wrong and users are not save over sessions
-			console.log(`Current user is undefined`);
-		}
+			} else {
+				Toast.makeText(`Current user is undefined`, `long`).show(); //TODO: sth is wrong and users are not save over sessions
+				console.log(`Current user is undefined`);
+			}
+
+		}).catch((err) => {
+			console.log(`Error during getting current user: ${err}`);
+		});
 	}
 }

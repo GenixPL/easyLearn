@@ -17,7 +17,9 @@ export class GoogleAuthComponent implements OnInit {
 
 	ngOnInit() { }
 
-	logInWithGoogle() {
+	logInWithGoogle() { //TODO:make it more safe //TODO:block ui until return
+		firebase.logout();
+
 		firebase.login({ //it may not co-work with web 
 			type: firebase.LoginType.GOOGLE,
 		}).then((user) => {

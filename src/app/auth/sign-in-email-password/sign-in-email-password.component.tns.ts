@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'nativescript-plugin-firebase/app';
+import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
 
@@ -20,16 +20,22 @@ export class SignInEmailPasswordComponent implements OnInit {
 
 	ngOnInit() { }
 	  
-	signInUser() { //TODO: make it more safe
-		firebase
-			.auth().signInWithEmailAndPassword(this.email, this.password)
-			.then((result) => { //here may be no return
-				console.log(`User signed in ${result}`); 
-			})
-			.catch((err) => {
-				let errMassage:string = JSON.stringify(err);
-				console.log("User signing error: " + errMassage);
-			});
+	signInUser() { //TODO: make it more safe //TODO:block ui until return
+		firebase.logout();
+
+		firebase.login({
+			type: firebase.LoginType.PASSWORD,
+			passwordOptions: {
+				email: this.email,
+				password: this.password
+			}
+	
+		}).then((newUser) => {
+			console.log(`User logged in ${newUser}`);
+				
+		}).catch((err) => {
+			console.log(`User logging ing error: ${err}`);
+		});	
 	}
 
 }

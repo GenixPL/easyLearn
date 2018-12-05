@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'nativescript-plugin-firebase/app';
+import * as firebase from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
 
@@ -24,20 +24,22 @@ export class SignUpEmailPasswordComponent implements OnInit {
 	ngOnInit() { }
 	  
 	signUpNewUser() { //TODO: make it more safe
-		firebase
-			.auth().createUserWithEmailAndPassword(this.email, this.password)
-			.then((newUser) => {
-				console.log(`User created ${newUser}`);
-				addSetsCollectionForUser(newUser);
-			})
-			.catch((err) => {
-				let errMassage:string = JSON.stringify(err);
-				console.log("User creation error: " + errMassage);
+		firebase.createUser({
+		  	email: this.email,
+		  	password: this.password
 
-				if (errMassage.includes("FirebaseAuthUserCollisionException")) {
-    				Toast.makeText(`ERROR: Account with the mail: ${this.email} already exists.`, "long").show();
-				}
-			});
+		}).then((newUser) => {
+			console.log(`User created ${newUser}`);
+			addSetsCollectionForUser(newUser);
+
+		}).catch((err) => {
+			let errMassage:string = JSON.stringify(err);
+			console.log("User creation error: " + errMassage);
+
+			if (errMassage.includes("FirebaseAuthUserCollisionException")) {
+    			Toast.makeText(`ERROR: Account with the mail: ${this.email} already exists.`, "long").show();
+			}
+		});
 	}
 
 }

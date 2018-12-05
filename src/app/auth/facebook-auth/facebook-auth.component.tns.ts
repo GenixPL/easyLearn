@@ -18,6 +18,8 @@ export class FacebookAuthComponent implements OnInit {
 	ngOnInit() { }
 
 	loginWithFacebook() {
+		firebase.logout();
+
 		firebase.login({
 			type: firebase.LoginType.FACEBOOK,
 			// Optional
