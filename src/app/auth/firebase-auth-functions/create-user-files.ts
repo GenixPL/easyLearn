@@ -3,11 +3,13 @@ import { User } from 'nativescript-plugin-firebase/firebase';
 import { isUndefined } from 'util';
 
 
-export function addSetsCollectionForUser(user:User) {
+export function createFilesForNewUser(user:User) {
 
 	if (isUndefined(user)) {
 		return;
 	}
+
+	createUser(user);
 
 	const sets_collection = firebase.firestore().collection("sets");
 	const privateSets_collection = sets_collection.doc("private-sets")
@@ -30,3 +32,8 @@ export function addSetsCollectionForUser(user:User) {
 		console.log(`error during adding user to users collection: ${err}`);
 	});
 }
+
+function createUser(user: User) {
+
+}
+

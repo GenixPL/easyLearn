@@ -1,5 +1,5 @@
 
-export class Set {
+export class ELSet {
     private setname: string;
     private language1: string;
     private language2: string;

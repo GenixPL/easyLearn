@@ -3,7 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
 
-import { addSetsCollectionForUser } from '../../firebase/firebase-functions';
+import { createFilesForNewUser } from '../../firebase-auth-functions/create-user-files';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class SignUpEmailPasswordComponent implements OnInit {
 
 		}).then((newUser) => {
 			console.log(`User created ${newUser}`);
-			addSetsCollectionForUser(newUser);
+			createFilesForNewUser(newUser);
 
 		}).catch((err) => {
 			let errMassage:string = JSON.stringify(err);

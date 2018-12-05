@@ -6,8 +6,8 @@ import { inputType, prompt, PromptOptions, PromptResult } from 'tns-core-modules
 import { topmost, EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
 
-import { addNewJSONFile } from '../set/file-functions.tns';
-import { Set } from '../set/set';
+import { addNewJSONFile } from '../firebase-set-functions/file-functions.tns';
+import { ELSet } from '../../models/el-set';
 
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
@@ -87,7 +87,7 @@ export class CreateNewSetComponent implements OnInit {
   }
 
   saveSet() {
-    let newSet: Set = new Set(this.newSetName, this.language1, this.language2);
+    let newSet: ELSet = new ELSet(this.newSetName, this.language1, this.language2);
 	addNewJSONFile(this.newSetName, newSet.getJSONString());
 	
 	topmost().goBack();

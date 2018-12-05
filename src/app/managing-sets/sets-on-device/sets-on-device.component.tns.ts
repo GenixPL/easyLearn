@@ -5,7 +5,7 @@ import { Button } from 'tns-core-modules/ui/button/button';
 import { ListView } from 'tns-core-modules/ui/list-view';
 import { EventData, Page } from 'tns-core-modules/ui/page/page';
 
-import { deleteSet, getSetsFiles } from '../set/file-functions.tns';
+import { deleteSet, getSetsFiles } from '../firebase-set-functions/file-functions.tns';
 
 
 @Component({
