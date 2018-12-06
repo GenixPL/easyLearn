@@ -29,7 +29,7 @@ export class SignUpEmailPasswordComponent implements OnInit {
 		  	password: this.password
 
 		}).then((user) => {
-			console.log(`New user created through emial-password auth: ${user}`);
+			console.log(`New user created through emial-password auth: ${JSON.stringify(user)}`);
 			createFilesForNewUser(user);
 
 		}).catch((err) => {

@@ -8,8 +8,9 @@ import { SignUpEmailPasswordComponent } from '../auth/email-password-auth/sign-u
 import { CreateNewSetComponent } from '../managing-sets/create-new-set/create-new-set.component.tns';
 import { HomeComponent } from '../home/home.component.tns';
 import { MarketComponent } from '../managing-sets/market/market.component.tns';
-import { SetsMenuComponent } from '../managing-sets/sets-menu/sets-menu.component.tns';
+import { SetsMenuComponent } from '../managing-sets/sets-menu.component.tns';
 import { SetsOnDeviceComponent } from '../managing-sets/sets-on-device/sets-on-device.component.tns';
+import { ShowMySetsComponent } from '../managing-sets/show-my-sets/show-my-sets.component.tns';
 
 
 export const routes: Routes = [
@@ -58,6 +59,10 @@ export const routes: Routes = [
 		path: 'facebook-auth',
 		component: FacebookAuthComponent
 	},
+	{
+		path: 'show-my-sets',
+		component: ShowMySetsComponent
+	},
 ];
 
 
@@ -71,5 +76,6 @@ export const components: any = [
 	SignInEmailPasswordComponent,
 	SignUpEmailPasswordComponent,
 	GoogleAuthComponent, 
-	FacebookAuthComponent
+	FacebookAuthComponent, 
+	ShowMySetsComponent
 ];

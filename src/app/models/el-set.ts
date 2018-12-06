@@ -26,6 +26,8 @@ export function getSampleJSONSet(documentId:string) {
 			word2: `Auto`
 		}]
 	}
+
+	return sampleSet;
 }
 
 

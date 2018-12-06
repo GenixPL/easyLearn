@@ -1,5 +1,6 @@
 import { User } from "nativescript-plugin-firebase";
 
+
 export interface ELUserInterface {
 	uid: string,
 	email: string,
@@ -14,12 +15,14 @@ export interface ELUserInterface {
 	friends: ELFriendInterface[]
 }
 
+
 export interface ELFriendInterface {
 	avatar_id: string,
 	nickname: string,
 	ranking: number,
 	uid: string
 }
+
 
 export function getNewUserJSON(user: User) {
 	let newUserJSON:ELUserInterface = {
