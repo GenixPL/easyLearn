@@ -18,15 +18,22 @@ export class MarketComponent implements OnInit {
   ngOnInit() { }
 
   getDoc() {
-	const Document = firebase.firestore().collection("public-sets").doc("nuZKAj9LHKV07fYAMvLc");
+		// const Document = firebase.firestore().collection("public-sets").doc("nuZKAj9LHKV07fYAMvLc");
 
-	Document.get().then(doc => {
-	  if (doc.exists) {
-		console.log(`Document data: ${JSON.stringify(doc.data())}`);
-	  } else {
-		console.log("No such document!");
-	  }
-	});
-  }
+		// Document.get().then(doc => {
+		//   if (doc.exists) {
+		// 	console.log(`Document data: ${JSON.stringify(doc.data())}`);
+		//   } else {
+		// 	console.log("No such document!");
+		//   }
+		// });
+
+		let dupa = {
+			name: "dupa"
+		}
+
+		console.log(`${dupa}`);
+		console.log(JSON.stringify(dupa));
+	}
 
 }

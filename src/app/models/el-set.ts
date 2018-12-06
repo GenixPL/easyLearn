@@ -1,12 +1,44 @@
+export interface ELSetInterface {
+	set_name: string,
+	document_id: string;
+	language1: string,
+	language2: string,
+	words: WordsPairInterface[]
+}
+
+interface WordsPairInterface {
+	word1: string,
+	word2: string
+}
+
+
+export function getSampleJSONSet(documentId:string) {
+	let sampleSet:ELSetInterface = {
+		set_name: `sample-set`,
+		document_id: documentId,
+		language1: `EN`,
+		language2: `DE`,
+		words: [{
+			word1: `sun`,
+			word2: `Sonne`
+		}, {
+			word1: `car`,
+			word2: `Auto`
+		}]
+	}
+}
+
 
 export class ELSet {
-    private setname: string;
+	private setname: string;
+	private documentId: string
     private language1: string;
     private language2: string;
     private words: Array<WordsPair>;
 
-    constructor(setName: string, language1: string, language2: string) {
-        this.setname = setName;
+    constructor(setName: string, language1: string, language2: string, documentId: string) {
+		this.setname = setName;
+		this.documentId = documentId;
         this.language1 = language1;
         this.language2 = language2;
         this.words = new Array(0);
@@ -35,56 +67,41 @@ export class ELSet {
 
     removeWords(position: number) {
         this.words.slice(position, 1);
-    }
+	}
 
     getJSON() {
+        let setJSON: ELSetInterface = {
+			set_name: this.setname,
+			document_id: this.documentId,
+			language1: this.language1,
+			language2: this.language2,
+			words: this.getWordsJSONArray()
+		};
 
-        let wordsData: string = `[`;
-        for(let i = 0; i < this.words.length; i++) {
-
-            wordsData += this.words[i].getJSONString();
-
-            if (i != (this.words.length - 1)) {
-                wordsData += `,`;
-            }
-        }
-        wordsData += `]`;
-
-        let setData: string = 
-        `{
-            "setname": "${this.setname}",
-            "language1": "${this.language1}",
-            "language2": "${this.language2}",
-            "words": ${wordsData}
-        }`;
-
-        return JSON.parse(setData);
+        return setJSON;
     }
 
     getJSONString() {
-
-        let wordsData: string = `[`;
-        for(let i = 0; i < this.words.length; i++) {
+        return JSON.stringify(this.getJSON());
+	}
+	
+	
+	private getWordsJSONArray() {
+		let wordsData: string = `[`;
+        for (let i = 0; i < this.words.length; i++) {
 
             wordsData += this.words[i].getJSONString();
 
             if (i != (this.words.length - 1)) {
                 wordsData += `,`;
             }
-        }
-        wordsData += `]`;
+		}
+		wordsData += `]`;
 
-        let setData: string = 
-        `{
-            "setname": "${this.setname}",
-            "language1": "${this.language1}",
-            "language2": "${this.language2}",
-            "words": ${wordsData}
-        }`;
-
-        return setData;
-    }
+		return <WordsPairInterface[]> JSON.parse(wordsData);
+	}
 }
+
 
 class WordsPair {
     word1: string;
@@ -96,23 +113,16 @@ class WordsPair {
     }
 
     getJSON() {
-        let wordsData: string = 
-        `{
-            "word1": "${this.word1}",
-            "word2": "${this.word2}"
-        }`;
+        let wordsPairJSON:WordsPairInterface = {
+			word1: this.word1,
+			word2: this.word2
+		}
 
-        return JSON.parse(wordsData);
+        return wordsPairJSON;
     }
 
     getJSONString() {
-        let wordsData: string = 
-        `{
-            "word1": "${this.word1}",
-            "word2": "${this.word2}"
-        }`;
-
-        return wordsData;
+        return JSON.stringify(this.getJSON());
     }
 }
   

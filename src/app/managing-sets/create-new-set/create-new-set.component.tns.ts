@@ -87,10 +87,10 @@ export class CreateNewSetComponent implements OnInit {
   }
 
   saveSet() {
-    let newSet: ELSet = new ELSet(this.newSetName, this.language1, this.language2);
-	addNewJSONFile(this.newSetName, newSet.getJSONString());
+    // let newSet: ELSet = new ELSet(this.newSetName, this.language1, this.language2);
+	// addNewJSONFile(this.newSetName, newSet.getJSONString());
 	
-	topmost().goBack();
+	// topmost().goBack();
   }
 }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
+import { createFilesForNewUser } from '../firebase-auth-functions/create-user-files';
+
 
 @Component({
 	selector: 'google-auth',
@@ -17,16 +19,20 @@ export class GoogleAuthComponent implements OnInit {
 
 	ngOnInit() { }
 
-	logInWithGoogle() { //TODO:make it more safe //TODO:block ui until return
+	logInWithGoogle() { //TODO:block ui until return
 		firebase.logout();
 
-		firebase.login({ //it may not co-work with web 
-			type: firebase.LoginType.GOOGLE,
+		firebase.login({
+			type: firebase.LoginType.GOOGLE
+
 		}).then((user) => {
 			console.log(`User logged in through google auth: ${JSON.stringify(user.email)}`);
+			if (user.additionalUserInfo.isNewUser) {
+				createFilesForNewUser(user);
+			}
 
 		}).catch((err) => {
-			console.log(`Error during google auth: ${err}`);
+			console.log(`Error occured during google auth: ${err}`);
 		});
 	}
 }

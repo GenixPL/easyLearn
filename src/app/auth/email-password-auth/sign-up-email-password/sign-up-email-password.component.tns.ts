@@ -28,14 +28,14 @@ export class SignUpEmailPasswordComponent implements OnInit {
 		  	email: this.email,
 		  	password: this.password
 
-		}).then((newUser) => {
-			console.log(`User created ${newUser}`);
-			createFilesForNewUser(newUser);
+		}).then((user) => {
+			console.log(`New user created through emial-password auth: ${user}`);
+			createFilesForNewUser(user);
 
 		}).catch((err) => {
-			let errMassage:string = JSON.stringify(err);
-			console.log("User creation error: " + errMassage);
+			console.log(`Error occured during user creation with email-password auth: ${err}`);
 
+			let errMassage:string = JSON.stringify(err);
 			if (errMassage.includes("FirebaseAuthUserCollisionException")) {
     			Toast.makeText(`ERROR: Account with the mail: ${this.email} already exists.`, "long").show();
 			}

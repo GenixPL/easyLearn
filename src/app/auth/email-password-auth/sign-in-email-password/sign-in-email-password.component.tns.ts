@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
+import { createFilesForNewUser } from '../../firebase-auth-functions/create-user-files';
+
 
 @Component({
 	selector: 'sign-in-email-password',
@@ -30,11 +32,11 @@ export class SignInEmailPasswordComponent implements OnInit {
 				password: this.password
 			}
 	
-		}).then((newUser) => {
-			console.log(`User logged in ${newUser}`);
-				
+		}).then((user) => {
+			console.log(`User logged in through email-password auth: ${user}`);
+			
 		}).catch((err) => {
-			console.log(`User logging ing error: ${err}`);
+			console.log(`Error occured during email-password auth: ${err}`);
 		});	
 	}
 
