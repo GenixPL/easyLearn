@@ -13,7 +13,8 @@ import { components } from './app.routes.tns';
 @NgModule({
   declarations: [
     AppComponent,
-    components
+	components,
+	
   ],
   imports: [
     NativeScriptModule,

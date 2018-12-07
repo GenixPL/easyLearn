@@ -1,33 +1,12 @@
+import { log } from '../../app/logger/logger';
+import { ELWordsPair, ELWordsPairInterface } from './el-words-pair';
+
 export interface ELSetInterface {
 	set_name: string,
 	document_id: string;
 	language1: string,
 	language2: string,
-	words: WordsPairInterface[]
-}
-
-interface WordsPairInterface {
-	word1: string,
-	word2: string
-}
-
-
-export function getSampleJSONSet(documentId:string) {
-	let sampleSet:ELSetInterface = {
-		set_name: `sample-set`,
-		document_id: documentId,
-		language1: `EN`,
-		language2: `DE`,
-		words: [{
-			word1: `sun`,
-			word2: `Sonne`
-		}, {
-			word1: `car`,
-			word2: `Auto`
-		}]
-	}
-
-	return sampleSet;
+	words: ELWordsPairInterface[]
 }
 
 
@@ -36,15 +15,15 @@ export class ELSet {
 	private documentId: string
     private language1: string;
     private language2: string;
-    private words: Array<WordsPair>;
+    private words: Array<ELWordsPair>;
 
-    constructor(setName: string, language1: string, language2: string, documentId: string) {
+    constructor(setName: string, documentId: string, language1: string, language2: string) {
 		this.setname = setName;
 		this.documentId = documentId;
         this.language1 = language1;
         this.language2 = language2;
         this.words = new Array(0);
-    }
+	}
 
     changeSetName(newName: string) {
         this.setname = newName;
@@ -59,7 +38,8 @@ export class ELSet {
     }
 
     addWords(word1: string, word2: string) {
-        this.words.push(new WordsPair(word1, word2));
+		let words = new ELWordsPair(word1, word2);
+		this.words.push(words);
     }
 
     changeWords(position: number, newWord1: string, newWord2: string) {
@@ -87,7 +67,6 @@ export class ELSet {
         return JSON.stringify(this.getJSON());
 	}
 	
-	
 	private getWordsJSONArray() {
 		let wordsData: string = `[`;
         for (let i = 0; i < this.words.length; i++) {
@@ -100,31 +79,35 @@ export class ELSet {
 		}
 		wordsData += `]`;
 
-		return <WordsPairInterface[]> JSON.parse(wordsData);
+		return <ELWordsPairInterface[]> JSON.parse(wordsData);
 	}
 }
 
 
-class WordsPair {
-    word1: string;
-    word2: string;
+export function getSetFromJSON(setJSON:ELSetInterface) {
+	let newSet = new ELSet(setJSON.set_name, setJSON.document_id, setJSON.language1, setJSON.language2);
+	setJSON.words.forEach((wordsPair:ELWordsPair) => {
+		newSet.addWords(wordsPair.word1, wordsPair.word2);
+	});
 
-    constructor(word1: string, word2: string) {
-        this.word1 = word1;
-        this.word2 = word2;
-    }
-
-    getJSON() {
-        let wordsPairJSON:WordsPairInterface = {
-			word1: this.word1,
-			word2: this.word2
-		}
-
-        return wordsPairJSON;
-    }
-
-    getJSONString() {
-        return JSON.stringify(this.getJSON());
-    }
+	return newSet;
 }
-  
+
+
+export function getSampleJSONSet(documentId:string) {
+	let sampleSet:ELSetInterface = {
+		set_name: `sample-set`,
+		document_id: documentId,
+		language1: `EN`,
+		language2: `DE`,
+		words: [{
+			word1: `sun`,
+			word2: `Sonne`
+		}, {
+			word1: `car`,
+			word2: `Auto`
+		}]
+	}
+
+	return sampleSet;
+}

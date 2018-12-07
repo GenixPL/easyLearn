@@ -9,7 +9,6 @@ import { CreateNewSetComponent } from '../managing-sets/create-new-set/create-ne
 import { HomeComponent } from '../home/home.component.tns';
 import { MarketComponent } from '../managing-sets/market/market.component.tns';
 import { SetsMenuComponent } from '../managing-sets/sets-menu.component.tns';
-import { SetsOnDeviceComponent } from '../managing-sets/sets-on-device/sets-on-device.component.tns';
 import { ShowMySetsComponent } from '../managing-sets/show-my-sets/show-my-sets.component.tns';
 
 
@@ -30,10 +29,6 @@ export const routes: Routes = [
   	{
 		path: 'create-new-set',
     	component: CreateNewSetComponent
-  	},
-  	{
-		path: 'sets-on-device',
-		component: SetsOnDeviceComponent
   	},
   	{
 		path: 'market',
@@ -70,7 +65,6 @@ export const components: any = [
     HomeComponent,
     SetsMenuComponent,
 	CreateNewSetComponent,
-	SetsOnDeviceComponent,
 	MarketComponent,
 	AuthComponent,
 	SignInEmailPasswordComponent,

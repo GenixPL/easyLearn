@@ -6,7 +6,6 @@ import { inputType, prompt, PromptOptions, PromptResult } from 'tns-core-modules
 import { topmost, EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
 
-import { addNewJSONFile } from '../firebase-set-functions/file-functions.tns';
 import { ELSet } from '../../models/el-set';
 
 
