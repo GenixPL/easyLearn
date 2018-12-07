@@ -51,10 +51,10 @@ function addSampleSetToUser(user: User) {
 		log(`New sample document has been created with id: ${JSON.stringify(doc.id)}`);
 
 		const sampleJSONSet = getSampleJSONSet(doc.id);
-		user_sets.doc(doc.id).set({
+		user_sets.doc(doc.id).set(
 			sampleJSONSet
 
-		}).then(() => {
+		).then(() => {
 			log(`Proper sample set document has been created: ${JSON.stringify(doc)}`);
 
 		}).catch((err) => {

@@ -27,7 +27,11 @@ export class ELSet {
 
     changeSetName(newName: string) {
         this.setname = newName;
-    }
+	}
+	
+	getSetName() {
+		return this.setname;
+	}
 
     changeFirstLanguage(newLanguage: string) {
         this.language1 = newLanguage;
