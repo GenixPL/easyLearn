@@ -1,5 +1,5 @@
-import { log } from '../../app/logger/logger';
 import { ELWordsPair, ELWordsPairInterface } from './el-words-pair';
+import { log } from "~/app/logger/logger";
 
 export interface ELSetInterface {
 	set_name: string,
@@ -22,24 +22,21 @@ export class ELSet {
 		this.documentId = documentId;
         this.language1 = language1;
         this.language2 = language2;
-        this.words = new Array(0);
+        this.words = new Array<ELWordsPair>(0);
 	}
 
-    changeSetName(newName: string) {
-        this.setname = newName;
-	}
-	
-	getSetName() {
-		return this.setname;
-	}
+    changeSetName(newName: string) { this.setname = newName; }
+	getSetName():string { return this.setname; }
 
-    changeFirstLanguage(newLanguage: string) {
-        this.language1 = newLanguage;
-    }
+	getDocumentId():string { return this.documentId; }
 
-    changeSecondLanguage(newLanguage: string) {
-        this.language2 = newLanguage;
-    }
+	changeFirstLanguage(newLanguage: string) { this.language1 = newLanguage; }
+	getFirstLanguage():string { return this.language1; }
+
+	changeSecondLanguage(newLanguage: string) { this.language2 = newLanguage; }
+	getSecondLanguage():string { return this.language2; }
+
+	getWords():Array<ELWordsPair> { return this.words; }
 
     addWords(word1: string, word2: string) {
 		let words = new ELWordsPair(word1, word2);
@@ -55,7 +52,7 @@ export class ELSet {
         this.words.slice(position, 1);
 	}
 
-    getJSON() {
+    getJSON():ELSetInterface {
         let setJSON: ELSetInterface = {
 			set_name: this.setname,
 			document_id: this.documentId,
@@ -67,7 +64,7 @@ export class ELSet {
         return setJSON;
     }
 
-    getJSONString() {
+    getJSONString():string {
         return JSON.stringify(this.getJSON());
 	}
 	
@@ -88,17 +85,20 @@ export class ELSet {
 }
 
 
-export function getSetFromJSON(setJSON:ELSetInterface) {
+export function getSetFromJSON(setJSON:ELSetInterface):ELSet {
+	log(`chuj ${setJSON.set_name}`);
 	let newSet = new ELSet(setJSON.set_name, setJSON.document_id, setJSON.language1, setJSON.language2);
 	setJSON.words.forEach((wordsPair:ELWordsPair) => {
 		newSet.addWords(wordsPair.word1, wordsPair.word2);
 	});
 
+	log(`\n\n${newSet.getSetName()}\n\n`);
+
 	return newSet;
 }
 
 
-export function getSampleJSONSet(documentId:string) {
+export function getSampleJSONSet(documentId:string):ELSetInterface {
 	let sampleSet:ELSetInterface = {
 		set_name: `sample-set`,
 		document_id: documentId,

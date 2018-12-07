@@ -8,7 +8,7 @@ import * as Toast from 'nativescript-toast';
 import { getAllSetsForUser } from '../firebase-set-functions/get-sets';
 import { log } from '~/app/logger/logger';
 import { isUndefined } from 'util';
-import { ELSet } from '~/app/models/el-set';
+import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
 
  
 @Component({
@@ -20,13 +20,15 @@ import { ELSet } from '~/app/models/el-set';
 export class ShowMySetsComponent implements OnInit {
 
 	private currentUser:User;
-	private userSets:Array<ELSet>;
+	private userSets:Array<ELSet> = new Array<ELSet>(0);
 
 	constructor(private router:Router, private page:Page) {
 		page.actionBarHidden = true;
-		
+	}
+
+	ngOnInit() { 
 		firebase.getCurrentUser()
-		.then((user) => {
+		.then((user) => {	//TODO: make it nicer
 			if (isUndefined(user)) {
 				log(`User is undefined`);
 				return;
@@ -34,8 +36,8 @@ export class ShowMySetsComponent implements OnInit {
 
 			this.currentUser = user;
 			getAllSetsForUser(this.currentUser)
-			.then((userSets:Array<ELSet>) => {
-				this.userSets = userSets;
+			.then((userSets:ELSet[]) => {
+					this.userSets = userSets;
 
 			}).catch((err) => {
 				log(`${err}`);
@@ -46,7 +48,5 @@ export class ShowMySetsComponent implements OnInit {
 			log(`Error occured during getting current user: ${err}`);
 		});
 	}
-
-	ngOnInit() { }
 
 }
