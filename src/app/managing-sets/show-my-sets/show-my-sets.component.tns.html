@@ -1,5 +1,6 @@
 <StackLayout>
-	<Label text="My sets" textWrap="true"></Label>
+	<Label text="My sets:" textWrap="false"></Label>
+
 	<ListView [items]="userSets">
 		<ng-template let-item="item" let-odd="odd" let-even="even">
 		  <StackLayout>

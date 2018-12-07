@@ -86,13 +86,10 @@ export class ELSet {
 
 
 export function getSetFromJSON(setJSON:ELSetInterface):ELSet {
-	log(`chuj ${setJSON.set_name}`);
 	let newSet = new ELSet(setJSON.set_name, setJSON.document_id, setJSON.language1, setJSON.language2);
 	setJSON.words.forEach((wordsPair:ELWordsPair) => {
 		newSet.addWords(wordsPair.word1, wordsPair.word2);
 	});
-
-	log(`\n\n${newSet.getSetName()}\n\n`);
 
 	return newSet;
 }

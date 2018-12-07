@@ -3,7 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
 
-import { createFilesForNewUser } from '../../firebase-auth-functions/create-user-files';
+import { createFilesForNewUser } from '../../../firebase-functions/create-user-files';
 
 
 @Component({

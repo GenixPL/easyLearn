@@ -2,9 +2,9 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { User } from 'nativescript-plugin-firebase/firebase';
 import { isUndefined } from 'util';
 
-import { log } from '../../logger/logger';
-import { getSampleJSONSet } from '../../models/el-set';
-import { getNewUserJSON } from '../../models/el-user';
+import { log } from '~/app/logger/logger';
+import { getSampleJSONSet } from '~/app/models/el-set';
+import { getNewUserJSON } from '~/app/models/el-user';
 
 
 export function createFilesForNewUser(user:User) {
@@ -41,7 +41,7 @@ function createUserFile(user: User) {
 }
 
 
-function addSampleSetToUser(user: User) {
+function addSampleSetToUser(user: User) { //TODO:merge this function with the one from create-new-set.ts
 	const user_sets = firebase.firestore.collection("users").doc(`${user.uid}`).collection(`sets`);
 
 	user_sets.add({
