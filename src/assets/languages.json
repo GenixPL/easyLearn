@@ -1,0 +1,12 @@
+[
+	{
+		"title": "EN",
+		"description": "English",
+		"image": "~/images/flags/flag-en.png"
+	}, 
+	{
+		"title": "DE",
+		"description": "German",
+		"image": "~/images/flags/flag-de.png"
+	}
+]

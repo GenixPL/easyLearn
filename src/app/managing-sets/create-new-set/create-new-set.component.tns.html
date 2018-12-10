@@ -1,4 +1,3 @@
-
 <StackLayout>
 
     <StackLayout orientation="horizontal">
@@ -19,4 +18,4 @@
     <Button text="Save set" (tap)="saveSet()"></Button>
     
 </StackLayout>
-<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listitems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>
+<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listItems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>

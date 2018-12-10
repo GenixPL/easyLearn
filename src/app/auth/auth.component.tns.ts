@@ -15,12 +15,12 @@ import { User } from 'nativescript-plugin-firebase';
 
 export class AuthComponent implements OnInit {
 
-	constructor(private router:Router, private page:Page) { 
+	constructor(private router: Router, private page: Page) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
-	  
+
 	moveToSignInEmailPasswordComponent() {
 		this.router.navigate(['sign-in-email-password']);
 	}
@@ -37,28 +37,33 @@ export class AuthComponent implements OnInit {
 		this.router.navigate(['facebook-auth']);
 	}
 
-	signOut() {
-		firebase.logout()
-      		.then(() => console.log("User logged out"))
-      		.catch(error => console.log("User logging out error: " + JSON.stringify(error)));
+	async signOut() {
+		try {
+			await firebase.logout();
+			console.log(`✔ log user out`);
+
+		} catch (err) {
+			console.log(`✘ log user out: ${err}`);
+		}
 	}
 
-	getCurrentUser() {
-		firebase.getCurrentUser()
-		.then((user) => {
+	async getCurrentUser() {
+		try {
+			let user: User = await firebase.getCurrentUser();
+
 			if (isDefined(user)) {
 				let userInfo: string = `${user.uid} ${user.email}`;
 
 				Toast.makeText(`Current user: ${userInfo}`, `long`).show();
 				console.log(`Current user: ${userInfo}`);
-			
+
 			} else {
-				Toast.makeText(`Current user is undefined`, `long`).show(); //TODO: sth is wrong and users are not save over sessions
+				Toast.makeText(`Current user is undefined`, `long`).show();
 				console.log(`Current user is undefined`);
 			}
 
-		}).catch((err) => {
+		} catch (err) {
 			console.log(`Error during getting current user: ${err}`);
-		});
+		}
 	}
 }

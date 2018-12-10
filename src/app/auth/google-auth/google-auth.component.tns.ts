@@ -3,6 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
 import { createFilesForNewUser } from '../../firebase-functions/create-user-files';
+import { User } from 'nativescript-plugin-firebase';
 
 
 @Component({
@@ -13,26 +14,28 @@ import { createFilesForNewUser } from '../../firebase-functions/create-user-file
 
 export class GoogleAuthComponent implements OnInit {
 
-	constructor(private page:Page) { 
+	constructor(private page: Page) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
 
-	logInWithGoogle() { //TODO:block ui until return
+	async logInWithGoogle() { //TODO:block ui until return
 		firebase.logout();
 
-		firebase.login({
-			type: firebase.LoginType.GOOGLE
+		try {
+			let user: User = await firebase.login({
+				type: firebase.LoginType.GOOGLE
 
-		}).then((user) => {
+			});
+
 			console.log(`User logged in through google auth: ${JSON.stringify(user.email)}`);
 			if (user.additionalUserInfo.isNewUser) {
 				createFilesForNewUser(user);
 			}
-
-		}).catch((err) => {
+			
+		} catch(err) {
 			console.log(`Error occured during google auth: ${err}`);
-		});
+		}
 	}
 }

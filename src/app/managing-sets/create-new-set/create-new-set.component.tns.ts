@@ -1,19 +1,19 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { registerElement } from 'nativescript-angular/element-registry';
+import * as firebase from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Button } from 'tns-core-modules/ui/button';
 import { inputType, prompt, PromptOptions, PromptResult } from 'tns-core-modules/ui/dialogs';
-import { topmost, EventData } from 'tns-core-modules/ui/frame';
+import { EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
-import * as firebase from 'nativescript-plugin-firebase';
 
-import { ELSet, ELSetInterface } from '../../models/el-set';
+import { ELSetInterface } from '../../models/el-set';
 import { createNewSetForUser } from '~/app/firebase-functions/create-new-set';
 import { log } from '~/app/logger/logger';
+import { User } from 'nativescript-plugin-firebase';
 
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
-
 
 @Component({
 	selector: 'app-create-new-set',
@@ -26,32 +26,18 @@ export class CreateNewSetComponent implements OnInit {
 	@ViewChild('CB1') check_box_add_to_library: ElementRef;
 	@ViewChild('myfilter') myfilter: ElementRef;
 
-	addToLibrary: boolean = false;
-	newSetName: string = "set-name";
-	language1: string;
-	language2: string;
-	listitems = [
-		{
-			"title": "EN",
-			"description": "English"
-		},
-		{
-			"title": "DE",
-			"description": "German"
-		},
-	];
-	lastLanguage: string;
+	private newSetName: string = "set-name";
+	private language1: string;
+	private language2: string;
+	private lastLanguage: string;
+	private listItems = require('~/assets/languages.json');
+
 
 	constructor(private page: Page) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() {
-	}
-
-	triggerCheckBox() {
-		this.addToLibrary = !this.addToLibrary;
-		Toast.makeText(String(this.addToLibrary)).show();
 	}
 
 	changeSetNameDialog() {
@@ -88,24 +74,23 @@ export class CreateNewSetComponent implements OnInit {
 		this.lastLanguage = btn.id;
 	}
 
-	saveSet() {
+	async saveSet() {
 		let newSet: ELSetInterface = {
 			set_name: this.newSetName,
 			document_id: "wrong-id",
 			language1: this.language1,
 			language2: this.language2,
-			words: [{word1:"!", word2:"?"}]
+			words: [{ word1: "!", word2: "?" }]
 		}
 
-		log(`${JSON.stringify(newSet)}`);
-
-		firebase.getCurrentUser()
-		.then((user) => {
+		try {
+			let user: User = await firebase.getCurrentUser();
 			createNewSetForUser(newSet, user);
 
-		}).catch((err) => {
-			log(`${err}`);
-		});
+		} catch (err) {
+			log(`✘ get current user`);
+		}
+
 	}
 }
 

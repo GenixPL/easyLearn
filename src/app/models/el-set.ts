@@ -95,10 +95,10 @@ export function getSetFromJSON(setJSON:ELSetInterface):ELSet {
 }
 
 
-export function getSampleJSONSet(documentId:string):ELSetInterface {
+export function getSampleJSONSet():ELSetInterface {
 	let sampleSet:ELSetInterface = {
 		set_name: `sample-set`,
-		document_id: documentId,
+		document_id: "wrong id, must be changed",
 		language1: `EN`,
 		language2: `DE`,
 		words: [{

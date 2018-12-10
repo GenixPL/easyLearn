@@ -3,6 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
 import { createFilesForNewUser } from '../../firebase-functions/create-user-files';
+import { User } from 'nativescript-plugin-firebase';
 
 
 @Component({
@@ -13,30 +14,31 @@ import { createFilesForNewUser } from '../../firebase-functions/create-user-file
 
 export class FacebookAuthComponent implements OnInit {
 
-	constructor(private page:Page) { 
+	constructor(private page: Page) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
 
-	loginWithFacebook() { //TODO:block ui until return
+	async loginWithFacebook() { //TODO:block ui until return
 		firebase.logout();
 
-		firebase.login({
-			type: firebase.LoginType.FACEBOOK,
-			facebookOptions: { // Optional
-			  scope: ['email']
-			}
+		try {
+			let user: User = await firebase.login({
+				type: firebase.LoginType.FACEBOOK,
+				facebookOptions: {
+					scope: ['email']
+				}
+			});
 
-		}).then((user) => {
 			JSON.stringify(`User logged in through facebook auth: ${JSON.stringify(user.email)}`);
 			if (user.additionalUserInfo.isNewUser) {
 				createFilesForNewUser(user);
 			}
-
-		}, (err) => {
+			
+		} catch(err) {
 			console.log(`Error occured during facebook auth: ${err}`);
-		});
+		}
 	}
 
 }
