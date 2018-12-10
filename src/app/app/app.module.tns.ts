@@ -12,14 +12,12 @@ import { components } from './app.routes.tns';
 
 @NgModule({
   declarations: [
-    AppComponent,
-	components,
-	
+	components
   ],
   imports: [
     NativeScriptModule,
 	AppRoutingModule,
-	NativeScriptFormsModule 
+	NativeScriptFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

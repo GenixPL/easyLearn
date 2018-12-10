@@ -44,7 +44,7 @@ async function createUserFile(user: User) {
 }
 
 
-async function addSampleSetToUser(user: User) { //TODO:merge this function with the one from create-new-set.ts
+async function addSampleSetToUser(user: User) {
 	const user_sets = firebase.firestore.collection("users").doc(`${user.uid}`).collection(`sets`);
 
 	try {

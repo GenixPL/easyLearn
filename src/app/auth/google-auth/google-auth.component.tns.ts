@@ -26,7 +26,6 @@ export class GoogleAuthComponent implements OnInit {
 		try {
 			let user: User = await firebase.login({
 				type: firebase.LoginType.GOOGLE
-
 			});
 
 			console.log(`User logged in through google auth: ${JSON.stringify(user.email)}`);

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Page } from 'tns-core-modules/ui/page/page';
 
+import { log } from '~/app/logger/logger';
+
 
 @Component({
 	selector: 'market',
@@ -11,6 +13,8 @@ import { Page } from 'tns-core-modules/ui/page/page';
 
 export class MarketComponent implements OnInit {
 
+	processing = false;
+
 	constructor(private router: Router, private page: Page) {
 		page.actionBarHidden = true;
 	}
@@ -18,5 +22,7 @@ export class MarketComponent implements OnInit {
 	ngOnInit() { }
 
 	getDoc() {
+		this.processing = !this.processing;
+		log(`wee`);
 	}
 }

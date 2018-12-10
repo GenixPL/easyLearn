@@ -10,9 +10,7 @@ export async function createNewSetForUser(set: ELSetInterface, user: User) {
 	try {
 		set.document_id = await getIdForNewSetForUser(user);
 
-		await user_sets.doc(set.document_id).set(
-			set
-		)
+		await user_sets.doc(set.document_id).set(set);
 		log(`✔ create new set`);
 
 	} catch (err) {

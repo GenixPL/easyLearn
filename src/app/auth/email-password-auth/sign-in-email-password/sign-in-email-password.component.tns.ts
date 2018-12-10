@@ -16,6 +16,7 @@ export class SignInEmailPasswordComponent implements OnInit {
 
 	private email: string = "dupa@o2.pl";
 	private password: string = "asdasdasd";
+	private isProcessing:boolean = false;
 
 	constructor(private page: Page) {
 		page.actionBarHidden = true;
@@ -23,7 +24,8 @@ export class SignInEmailPasswordComponent implements OnInit {
 
 	ngOnInit() { }
 
-	async signInUser() { //TODO: make it more safe //TODO:block ui until return
+	async signInUser() { //TODO: make it more safe
+		this.isProcessing = true;
 		firebase.logout();
 
 		try {
@@ -39,6 +41,7 @@ export class SignInEmailPasswordComponent implements OnInit {
 		} catch(err) {
 			console.log(`Error occured during email-password auth: ${err}`);
 		}
-	}
 
+		this.isProcessing = false;
+	}
 }

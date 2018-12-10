@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { AppComponent } from './app.component.tns';
 import { AuthComponent } from '../auth/auth.component.tns';
 import { FacebookAuthComponent } from '../auth/facebook-auth/facebook-auth.component.tns';
 import { GoogleAuthComponent } from '../auth/google-auth/google-auth.component.tns';
@@ -67,6 +68,7 @@ export const routes: Routes = [
 
 
 export const components: any = [
+	AppComponent,
     HomeComponent,
     SetsMenuComponent,
 	CreateNewSetComponent,
