@@ -11,7 +11,7 @@ export async function createNewSetForUser(set: ELSetInterface, user: User) {
 		set.document_id = await getIdForNewSetForUser(user);
 
 		await user_sets.doc(set.document_id).set(
-			set	//TODO:add created_date to sets
+			set
 		)
 		log(`✔ create new set`);
 
