@@ -11,6 +11,7 @@ import { ELSetInterface, getSetFromJSON } from '../../models/el-set';
 import { createNewSetForUser } from '~/app/firebase-functions/create-new-set';
 import { log } from '~/app/logger/logger';
 import { User } from 'nativescript-plugin-firebase';
+import { validateSet, ELValidationResult } from '~/app/models/set-validator';
 
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
@@ -84,6 +85,12 @@ export class CreateNewSetComponent implements OnInit {
 			words: [{ word1: "!", word2: "?" }] //remove this later
 		}
 
+		let result:ELValidationResult = validateSet(newSet);
+		if (!result.is_valid) {
+			Toast.makeText(`${result.err}`, `long`).show();
+			return;
+		}
+
 		try {
 			let user: User = await firebase.getCurrentUser();
 			createNewSetForUser(newSet, user);
@@ -94,5 +101,3 @@ export class CreateNewSetComponent implements OnInit {
 
 	}
 }
-
-// TODO: check correctness of data to save
