@@ -2,11 +2,12 @@
 	<Label text="My sets:" textWrap="false"></Label>
 
 	<ListView [items]="userSets">
-		<ng-template let-item="item" let-odd="odd" let-even="even">
+		<ng-template let-item="item" let-odd="odd" let-even="even" class="my-listView">
 		  <StackLayout>
-			<Label [text]="item.getSetName()" ></Label>
+			<Label [text]="item.getSetName()" class="listLabel"></Label>
 			
 		  </StackLayout>
 		</ng-template>
 	</ListView>
+
 </StackLayout>

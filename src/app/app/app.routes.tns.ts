@@ -10,6 +10,7 @@ import { HomeComponent } from '../home/home.component.tns';
 import { MarketComponent } from '../managing-sets/market/market.component.tns';
 import { SetsMenuComponent } from '../managing-sets/sets-menu.component.tns';
 import { ShowMySetsComponent } from '../managing-sets/show-my-sets/show-my-sets.component.tns';
+import { ManageSetComponent } from '../managing-sets/manage-set/manage-set.component.tns';
 
 
 export const routes: Routes = [
@@ -58,6 +59,10 @@ export const routes: Routes = [
 		path: 'show-my-sets',
 		component: ShowMySetsComponent
 	},
+	{
+		path: 'manage-set',
+		component: ManageSetComponent
+	},
 ];
 
 
@@ -71,5 +76,6 @@ export const components: any = [
 	SignUpEmailPasswordComponent,
 	GoogleAuthComponent, 
 	FacebookAuthComponent, 
-	ShowMySetsComponent
+	ShowMySetsComponent,
+	ManageSetComponent
 ];

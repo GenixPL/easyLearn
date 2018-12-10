@@ -1,0 +1,37 @@
+<StackLayout>
+	
+	<StackLayout orientation="horizontal">
+			<Label text="Set name:" textWrap="true"></Label>
+			<TextView hint="" text="" editable="true"></TextView>
+	</StackLayout>
+	
+
+	<StackLayout orientation="horizontal">
+			<Label text="First language:" textWrap="true"></Label>
+			<TextView hint="" text="" editable="true"></TextView>
+	</StackLayout>
+	
+
+	<StackLayout orientation="horizontal">
+			<Label text="Second language:" textWrap="true"></Label>
+			<TextView hint="" text="" editable="true"></TextView>
+	</StackLayout>
+
+
+	<StackLayout>
+			<Label text="Words" textWrap="true"></Label>
+			<ListView items="[a, b, s]" class="list-group">
+				<ng-template let-item="item" let-odd="odd" let-even="even">
+				  <StackLayout>
+					<Label text="item" class="list-group-item"></Label>
+					
+				  </StackLayout>
+				</ng-template>
+			</ListView>
+	</StackLayout>
+
+
+	<!-- <Button text="Save" (tap)="saveSet()"></Button>  I cant see it -->
+		
+	
+</StackLayout>

@@ -49,4 +49,8 @@ export class ShowMySetsComponent implements OnInit {
 		});
 	}
 
+	onItemTap(args) {
+		
+	}
+
 }

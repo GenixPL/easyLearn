@@ -33,4 +33,8 @@ export class SetsMenuComponent implements OnInit {
 		this.router.navigate(['show-my-sets']);
 	}
 
+	moveToManageSetComponent() {
+		this.router.navigate(['manage-set']);
+	}
+
 }
