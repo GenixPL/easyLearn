@@ -4,6 +4,7 @@ import { Page } from 'tns-core-modules/ui/page/page';
 
 import { createFilesForNewUser } from '../../firebase-functions/create-user-files';
 import { User } from 'nativescript-plugin-firebase';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -14,13 +15,16 @@ import { User } from 'nativescript-plugin-firebase';
 
 export class GoogleAuthComponent implements OnInit {
 
-	constructor(private page: Page) {
+	private isUiEnabled: boolean = true;
+
+	constructor(private page: Page, private location:Location) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
 
-	async logInWithGoogle() { //TODO:block ui until return
+	async logInWithGoogle() {
+		this.isUiEnabled = false;
 		firebase.logout();
 
 		try {
@@ -32,9 +36,15 @@ export class GoogleAuthComponent implements OnInit {
 			if (user.additionalUserInfo.isNewUser) {
 				createFilesForNewUser(user);
 			}
-			
-		} catch(err) {
+
+			if (this.location.path() == 'google-auth') {
+				this.location.back();
+			}
+
+		} catch (err) {
 			console.log(`Error occured during google auth: ${err}`);
 		}
+
+		this.isUiEnabled = true;
 	}
 }

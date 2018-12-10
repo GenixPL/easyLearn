@@ -4,6 +4,10 @@ import { Page } from 'tns-core-modules/ui/page/page';
 
 import { createFilesForNewUser } from '../../../firebase-functions/create-user-files';
 import { User } from 'nativescript-plugin-firebase';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { log } from '~/app/logger/logger';
 
 
 @Component({
@@ -16,16 +20,16 @@ export class SignInEmailPasswordComponent implements OnInit {
 
 	private email: string = "dupa@o2.pl";
 	private password: string = "asdasdasd";
-	private isProcessing:boolean = false;
+	private isUiEnabled: boolean = true;
 
-	constructor(private page: Page) {
+	constructor(private page: Page, private location:Location) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
 
 	async signInUser() { //TODO: make it more safe
-		this.isProcessing = true;
+		this.isUiEnabled = false;
 		firebase.logout();
 
 		try {
@@ -37,11 +41,14 @@ export class SignInEmailPasswordComponent implements OnInit {
 				}
 			});
 			console.log(`User logged in through email-password auth: ${user.uid}`);
-			
-		} catch(err) {
+
+		} catch (err) {
 			console.log(`Error occured during email-password auth: ${err}`);
 		}
 
-		this.isProcessing = false;
+		this.isUiEnabled = true;
+		if (this.location.path() == 'sign-in-email-password') {
+			this.location.back();
+		}
 	}
 }

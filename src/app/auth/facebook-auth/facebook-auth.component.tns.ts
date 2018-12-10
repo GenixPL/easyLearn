@@ -4,6 +4,7 @@ import { Page } from 'tns-core-modules/ui/page/page';
 
 import { createFilesForNewUser } from '../../firebase-functions/create-user-files';
 import { User } from 'nativescript-plugin-firebase';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -14,13 +15,16 @@ import { User } from 'nativescript-plugin-firebase';
 
 export class FacebookAuthComponent implements OnInit {
 
-	constructor(private page: Page) {
+	private isUiEnabled:boolean = true;
+
+	constructor(private page: Page, private location:Location) {
 		page.actionBarHidden = true;
 	}
 
 	ngOnInit() { }
 
-	async loginWithFacebook() { //TODO:block ui until return
+	async loginWithFacebook() {
+		this.isUiEnabled = false;
 		firebase.logout();
 
 		try {
@@ -36,9 +40,15 @@ export class FacebookAuthComponent implements OnInit {
 				createFilesForNewUser(user);
 			}
 			
+			if (this.location.path() == 'facebook-auth') {
+				this.location.back();
+			}
+			
 		} catch(err) {
 			console.log(`Error occured during facebook auth: ${err}`);
 		}
+
+		this.isUiEnabled = true;
 	}
 
 }
