@@ -7,7 +7,7 @@ import { inputType, prompt, PromptOptions, PromptResult } from 'tns-core-modules
 import { EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
 
-import { ELSetInterface } from '../../models/el-set';
+import { ELSetInterface, getSetFromJSON } from '../../models/el-set';
 import { createNewSetForUser } from '~/app/firebase-functions/create-new-set';
 import { log } from '~/app/logger/logger';
 import { User } from 'nativescript-plugin-firebase';
@@ -78,9 +78,10 @@ export class CreateNewSetComponent implements OnInit {
 		let newSet: ELSetInterface = {
 			set_name: this.newSetName,
 			document_id: "wrong-id",
+			created_date: new Date(),
 			language1: this.language1,
 			language2: this.language2,
-			words: [{ word1: "!", word2: "?" }]
+			words: [{ word1: "!", word2: "?" }] //remove this later
 		}
 
 		try {
