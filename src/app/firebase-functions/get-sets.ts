@@ -3,23 +3,22 @@ import { firestore } from 'nativescript-plugin-firebase';
 import { log } from "~/app/logger/logger";
 import { ELSet, getSetFromJSON, ELSetInterface } from "~/app/models/el-set";
 
-export function getAllSetsForUser(user: User) {
-	let fetchDataPromise = new Promise(function (resolve, reject) {
-		const userSetsData = firestore.collection("users").doc(user.uid).collection("sets").get()
-			.then((docs) => {
-				let arrayOfSets:Array<ELSet> = new Array<ELSet>(0);
+export async function getAllSetsForUser(user: User): Promise<ELSet[]> {
+	let userSets;
+	let setsArray: ELSet[] = new ELSet[0];
 
-				docs.forEach((setDoc) => {
-					arrayOfSets.push(getSetFromJSON(<ELSetInterface>setDoc.data()));
-				});
-				
-				resolve(arrayOfSets);
+	try {
+		userSets = await firestore.collection("users").doc(user.uid).collection("sets").get();
+		log(`✔ get user sets`);
 
-			}).catch((err) => {
-				log(`Error occured during fetching user sets documents: ${err}`);
-				reject(`Data could not be fetched.`);
-			});
+	} catch (err) {
+		log(`✘ get user sets`);
+		throw err;
+	}
+
+	userSets.forEach((setDoc) => {
+		setsArray.push(getSetFromJSON(<ELSetInterface>setDoc.data()));
 	});
 
-	return fetchDataPromise;
+	return setsArray;
 }

@@ -5,64 +5,55 @@ import { isUndefined } from 'util';
 import { log } from '~/app/logger/logger';
 import { getSampleJSONSet } from '~/app/models/el-set';
 import { getNewUserJSON } from '~/app/models/el-user';
+import { createNewSetForUser } from './create-new-set';
 
 
-export function createFilesForNewUser(user:User) {
+export async function createFilesForNewUser(user: User) {
 
 	if (isUndefined(user)) {
-		log(`Error: user is undefined inside createFilesForNewUser()`);
+		log(`✘ create files for new user (user is undefined)`);
 		return;
 	}
 
-	createUserFile(user);
-	addSampleSetToUser(user);
+	try {
+		await createUserFile(user);
+		await addSampleSetToUser(user);
+
+		log(`✔ create files for new user`);
+
+	} catch (err) {
+		log(`✘ create files for new user`);
+	}
 }
 
 
-function createUserFile(user: User) {
-
-	if (isUndefined(user)) {
-		log(`Error: user is undefined inside createUserFile()`);
-		return;
-	}
-
+async function createUserFile(user: User) {
 	const newUserJSON = getNewUserJSON(user);
 	const users_collection = firebase.firestore.collection(`users`);
 
-	users_collection.doc(`${user.uid}`).set(
-		newUserJSON
+	try {
+		await users_collection.doc(`${user.uid}`).set(
+			newUserJSON
+		)
+		log(`✔ add new user to files`);
 
-	).then(() => {
-		log(`New user has been added to users collection`);
-
-	}).catch((err) => {
-		log(`Error occured while adding new user to users collection: ${err}`);
-	});
+	} catch (err) {
+		log(`✘ add new user to files`);
+		throw err;
+	}
 }
 
 
-function addSampleSetToUser(user: User) { //TODO:merge this function with the one from create-new-set.ts
+async function addSampleSetToUser(user: User) { //TODO:merge this function with the one from create-new-set.ts
 	const user_sets = firebase.firestore.collection("users").doc(`${user.uid}`).collection(`sets`);
 
-	user_sets.add({
-		name: "sample"//just to get new document id
-		
-	}).then((doc) => {
-		log(`New sample document has been created with id: ${JSON.stringify(doc.id)}`);
+	try {
+		await createNewSetForUser(getSampleJSONSet(), user);
+		log(`✔ add sample set`);
 
-		const sampleJSONSet = getSampleJSONSet(doc.id);
-		user_sets.doc(doc.id).set(
-			sampleJSONSet
-
-		).then(() => {
-			log(`Proper sample set document has been created: ${JSON.stringify(doc)}`);
-
-		}).catch((err) => {
-			log(`Error occured while setting new set document to proper form ${err}`)
-		});
-
-	}).catch((err) => {
-		log(`Error occured while creating of new set document: ${err}`);
-	});
+	} catch (err) {
+		log(`✘ add sample set`);
+		throw err;
+	}
 }
 

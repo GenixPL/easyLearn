@@ -4,31 +4,35 @@ import { ELSet, ELSetInterface } from '~/app/models/el-set';
 import { log } from '~/app/logger/logger';
 
 
-export function createNewSetForUser(set:ELSetInterface, user:User) {
+export async function createNewSetForUser(set: ELSetInterface, user: User) {
 	const user_sets = firestore.collection("users").doc(`${user.uid}`).collection(`sets`);
 
-	user_sets.add({
-		name: "sample"//just to get new document id
-		
-	}).then((doc) => {
-		log(`New sample document has been created with id: ${JSON.stringify(doc.id)}`);
-		set.document_id = doc.id;
-		log(`\n${JSON.stringify(set)}\n`);
+	try {
+		set.document_id = await getIdForNewSetForUser(user);
 
-		user_sets.doc(doc.id).set(
+		await user_sets.doc(set.document_id).set(
 			set	//TODO:add created_date to sets
+		)
+		log(`✔ create new set`);
 
-		).then(() => {
-			log(`Proper sample set document has been created: ${JSON.stringify(doc)}`);
-
-		}).catch((err) => {
-			log(`Error occured while setting new set document to proper form ${err}`)
-		});
-
-	}).catch((err) => {
-		log(`Error occured while creating of new set document: ${err}`);
-	});
+	} catch (err) {
+		log(`✘ create new set`);
+	}
 }
 
-export function getIdForNewSet() {
+export async function getIdForNewSetForUser(user: User): Promise<string> {
+	const user_sets = firestore.collection("users").doc(`${user.uid}`).collection(`sets`);
+	let doc;
+
+	try {
+		doc = await user_sets.add({
+			name: "sample"
+		});
+		log(`✔ get new set id`);
+
+	} catch (err) {
+		log(`✘ get new set id`);
+	}
+
+	return doc.id;
 }
