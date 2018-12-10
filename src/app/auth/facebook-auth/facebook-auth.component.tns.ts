@@ -40,7 +40,7 @@ export class FacebookAuthComponent implements OnInit {
 				createFilesForNewUser(user);
 			}
 			
-			if (this.location.path() == 'facebook-auth') {
+			if (this.location.path() == '/facebook-auth') {
 				this.location.back();
 			}
 			

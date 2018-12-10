@@ -37,7 +37,7 @@ export class GoogleAuthComponent implements OnInit {
 				createFilesForNewUser(user);
 			}
 
-			if (this.location.path() == 'google-auth') {
+			if (this.location.path() == '/google-auth') {
 				this.location.back();
 			}
 

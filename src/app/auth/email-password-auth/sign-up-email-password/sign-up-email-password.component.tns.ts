@@ -6,6 +6,7 @@ import { Page } from 'tns-core-modules/ui/page/page';
 import { createFilesForNewUser } from '../../../firebase-functions/create-user-files';
 import { User } from 'nativescript-plugin-firebase';
 import { Location } from '@angular/common';
+import { log } from '~/app/logger/logger';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class SignUpEmailPasswordComponent implements OnInit {
 
 	private email: string = "ciekaw@o2.pl";
 	private password: string = "asdasdasd";
-	private isUiEnabled: boolean = true;
+	private isUiEnabled: boolean = true; //TODO:it throws some fucking error, but still words
 
 	constructor(private page: Page, private location: Location) {
 		page.actionBarHidden = true;
@@ -28,17 +29,19 @@ export class SignUpEmailPasswordComponent implements OnInit {
 
 	async signUpNewUser() { //TODO: make it more safe
 		this.isUiEnabled = false;
+
 		firebase.logout();
 
 		try {
 			let user: User = await firebase.createUser({
 				email: this.email,
-				password: this.password
+				password: this.password //TODO: add validation
 			});
 			console.log(`New user created through emial-password auth: ${JSON.stringify(user)}`);
 			createFilesForNewUser(user);
 
-			if (this.location.path() == 'sign-up-email-password') {
+			log(`${this.location.path()}`);
+			if (this.location.path() == '/sign-up-email-password') {
 				this.location.back();
 			}
 

@@ -47,7 +47,7 @@ export class SignInEmailPasswordComponent implements OnInit {
 		}
 
 		this.isUiEnabled = true;
-		if (this.location.path() == 'sign-in-email-password') {
+		if (this.location.path() == '/sign-in-email-password') {
 			this.location.back();
 		}
 	}

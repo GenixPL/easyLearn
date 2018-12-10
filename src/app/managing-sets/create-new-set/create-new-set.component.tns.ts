@@ -24,7 +24,6 @@ registerElement("FilterableListpicker", () => require("nativescript-filterable-l
 
 export class CreateNewSetComponent implements OnInit {
 
-	@ViewChild('CB1') check_box_add_to_library: ElementRef;
 	@ViewChild('myfilter') myfilter: ElementRef;
 
 	private newSetName: string = "set-name";
@@ -82,7 +81,7 @@ export class CreateNewSetComponent implements OnInit {
 			created_date: new Date(),
 			language1: this.language1,
 			language2: this.language2,
-			words: [{ word1: "!", word2: "?" }] //remove this later
+			words: [{ word1: "!", word2: "?" }] //TODO:remove this later
 		}
 
 		let result:ELValidationResult = validateSet(newSet);
