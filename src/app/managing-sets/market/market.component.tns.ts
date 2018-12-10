@@ -21,7 +21,7 @@ export class MarketComponent implements OnInit {
   	ngOnInit() { }
 
   	getDoc() {
-		let json:ELSetInterface = getSampleJSONSet("sample");
+		let json:ELSetInterface = getSampleJSONSet();
 		log(`json ${JSON.stringify(json)}`);
 		let set:ELSet = getSetFromJSON(json);
 		log(`set: ${set.getJSONString()}`);
