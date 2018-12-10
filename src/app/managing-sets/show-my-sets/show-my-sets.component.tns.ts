@@ -10,43 +10,42 @@ import { log } from '~/app/logger/logger';
 import { isUndefined } from 'util';
 import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
 
- 
+
 @Component({
-  selector: 'show-my-sets',
-  templateUrl: './show-my-sets.component.html',
-  styleUrls: ['./show-my-sets.component.css'],
+	selector: 'show-my-sets',
+	templateUrl: './show-my-sets.component.html',
+	styleUrls: ['./show-my-sets.component.css'],
 })
 
 export class ShowMySetsComponent implements OnInit {
 
-	private currentUser:User;
-	private userSets:Array<ELSet> = new Array<ELSet>(0);
+	private currentUser: User;
+	private userSets: ELSet[] = new Array(0);
 
-	constructor(private router:Router, private page:Page) {
+	constructor(private router: Router, private page: Page) {
 		page.actionBarHidden = true;
 	}
 
-	ngOnInit() { 
-		firebase.getCurrentUser()
-		.then((user) => {	//TODO: make it nicer
-			if (isUndefined(user)) {
-				log(`User is undefined`);
-				return;
-			}
+	async ngOnInit() {
+		try {
+			this.currentUser = await firebase.getCurrentUser();
 
-			this.currentUser = user;
-			getAllSetsForUser(this.currentUser)
-			.then((userSets:ELSet[]) => {
-					this.userSets = userSets;
+		} catch (err) {
+			log(`✘ get current user`);
+			return;
+		}
 
-			}).catch((err) => {
-				log(`${err}`);
-				Toast.makeText(`${err} Try again.`);
-			});
+		if (isUndefined(this.currentUser)) {
+			log(`✘ current user is undefined`);
+			return;
+		}
 
-		}).catch((err) => {
-			log(`Error occured during getting current user: ${err}`);
-		});
+		try {
+			this.userSets = await getAllSetsForUser(this.currentUser);
+		} catch (err) {
+			log(`✘ get user sets`);
+			Toast.makeText(`${err} Try again.`);
+		}
 	}
 
 }

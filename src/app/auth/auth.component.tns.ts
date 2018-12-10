@@ -37,10 +37,14 @@ export class AuthComponent implements OnInit {
 		this.router.navigate(['facebook-auth']);
 	}
 
-	signOut() {
-		firebase.logout()
-			.then(() => console.log("User logged out"))
-			.catch(error => console.log("User logging out error: " + JSON.stringify(error)));
+	async signOut() {
+		try {
+			await firebase.logout();
+			console.log(`✔ log user out`);
+
+		} catch (err) {
+			console.log(`✘ log user out: ${err}`);
+		}
 	}
 
 	async getCurrentUser() {
@@ -57,7 +61,7 @@ export class AuthComponent implements OnInit {
 				Toast.makeText(`Current user is undefined`, `long`).show();
 				console.log(`Current user is undefined`);
 			}
-			
+
 		} catch (err) {
 			console.log(`Error during getting current user: ${err}`);
 		}
