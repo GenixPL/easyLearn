@@ -19,7 +19,7 @@ export class SignUpEmailPasswordComponent implements OnInit {
 
 	private email: string = "ciekaw@o2.pl";
 	private password: string = "asdasdasd";
-	private isUiEnabled: boolean = true; //TODO:it throws some fucking error, but still words
+	private isUiEnabled: boolean = true; //TODO:it throws some fucking error, but still works (and only sometimes on emulator)
 
 	constructor(private page: Page, private location: Location) {
 		page.actionBarHidden = true;

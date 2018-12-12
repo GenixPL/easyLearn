@@ -9,7 +9,7 @@ import { getAllSetsForUser } from '../../firebase-functions/get-sets';
 import { log } from '~/app/logger/logger';
 import { isUndefined } from 'util';
 import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
-
+ 
 
 @Component({
 	selector: 'show-my-sets',
@@ -49,7 +49,6 @@ export class ShowMySetsComponent implements OnInit {
 	}
 
 	onItemTap(args) {
-		
 	}
 
 }

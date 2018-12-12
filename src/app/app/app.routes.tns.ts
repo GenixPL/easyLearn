@@ -12,12 +12,13 @@ import { MarketComponent } from '../managing-sets/market/market.component.tns';
 import { SetsMenuComponent } from '../managing-sets/sets-menu.component.tns';
 import { ShowMySetsComponent } from '../managing-sets/show-my-sets/show-my-sets.component.tns';
 import { ManageSetComponent } from '../managing-sets/manage-set/manage-set.component.tns';
+import { LabelSetComponent } from '../ui/label-set/label-set.component.tns';
 
 
 export const routes: Routes = [
 	{
 		path: '',
-    	redirectTo: '/home',
+    	redirectTo: '/show-my-sets',
     	pathMatch: 'full',
   	},
   	{
@@ -79,5 +80,6 @@ export const components: any = [
 	GoogleAuthComponent, 
 	FacebookAuthComponent, 
 	ShowMySetsComponent,
-	ManageSetComponent
+	ManageSetComponent,
+	LabelSetComponent
 ];
