@@ -1,6 +1,6 @@
 <ListView [items]="sets">
 	<ng-template let-item="item">
-		<StackLayout orientation="horizontal" (tap)="getSetId(item)">
+		<StackLayout orientation="horizontal" (tap)="getSetId(item)" id="list-view-layout">
 			<Image [src]="item.image1" id="left-image"></Image>
 			<Image [src]="item.image2" id="right-image"></Image>
 			<Label [text]="item.setName"></Label>

@@ -1,6 +1,5 @@
-StackLayout {
+list-view-layout {
 	height: 150px;
-	background-color: aqua;
 }
 
 Image {
