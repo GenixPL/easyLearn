@@ -12,13 +12,13 @@ import { MarketComponent } from '../managing-sets/market/market.component.tns';
 import { SetsMenuComponent } from '../managing-sets/sets-menu.component.tns';
 import { ShowMySetsComponent } from '../managing-sets/show-my-sets/show-my-sets.component.tns';
 import { ManageSetComponent } from '../managing-sets/manage-set/manage-set.component.tns';
-import { LabelSetComponent } from '../ui/label-set/label-set.component.tns';
+import { ListViewSetsComponent } from '../ui/listView-sets/listView-sets.component.tns';
 
 
 export const routes: Routes = [
 	{
 		path: '',
-    	redirectTo: '/show-my-sets',
+    	redirectTo: '/home',
     	pathMatch: 'full',
   	},
   	{
@@ -81,5 +81,5 @@ export const components: any = [
 	FacebookAuthComponent, 
 	ShowMySetsComponent,
 	ManageSetComponent,
-	LabelSetComponent
+	ListViewSetsComponent
 ];

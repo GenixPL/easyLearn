@@ -1,10 +1,6 @@
 <StackLayout>
 	<Label text="My sets:" textWrap="false"></Label>
 
-	<ListView [items]="userSets">
-		<ng-template let-item="item">
-			<label-set [source]="item"></label-set>
-		</ng-template>
-	</ListView>
+	<listView-sets [source]="userSets" (getSetIdOnTap)="pff($event)"></listView-sets>
 
 </StackLayout>

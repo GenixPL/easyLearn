@@ -48,7 +48,8 @@ export class ShowMySetsComponent implements OnInit {
 		}
 	}
 
-	onItemTap(args) {
+	pff(setId: string){
+		log(`holder: ${setId}`);
 	}
 
 }
