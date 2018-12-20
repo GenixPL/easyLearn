@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
 import { Page } from 'tns-core-modules/ui/page/page';
 
-import { createFilesForNewUser } from '../../../firebase-functions/create-user-files';
+import { createFilesForNewUser } from '~/app/firebase-service/create-user-files';
 import { User } from 'nativescript-plugin-firebase';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';

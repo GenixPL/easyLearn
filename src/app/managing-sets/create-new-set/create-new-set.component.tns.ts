@@ -8,7 +8,7 @@ import { EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
 
 import { ELSetInterface, getSetFromJSON } from '../../models/el-set';
-import { createNewSetForUser } from '~/app/firebase-functions/create-new-set';
+import { createNewSetForUser } from '~/app/firebase-service/create-new-set';
 import { log } from '~/app/logger/logger';
 import { User } from 'nativescript-plugin-firebase';
 import { validateSet, ELValidationResult } from '~/app/models/set-validator';

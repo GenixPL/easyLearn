@@ -5,7 +5,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import { User } from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 
-import { getAllSetsForUser } from '../../firebase-functions/get-sets';
+import { getAllSetsForUser } from '~/app/firebase-service/get-sets';
 import { log } from '~/app/logger/logger';
 import { isUndefined } from 'util';
 import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
