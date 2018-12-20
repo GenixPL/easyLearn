@@ -1,5 +1,4 @@
 import { ELWordsPair, ELWordsPairInterface } from './el-words-pair';
-import { log } from "~/app/logger/logger";
 
 
 export interface ELSetInterface {
@@ -13,7 +12,7 @@ export interface ELSetInterface {
 
 
 export class ELSet {
-	private setname: string;
+	private setName: string;
 	private documentId: string;
 	private createdDate: Date;	
     private language1: string;
@@ -21,7 +20,7 @@ export class ELSet {
     private words: Array<ELWordsPair>;
 
     constructor(setName:string, documentId: string, createdDate: Date, language1: string, language2: string) {
-		this.setname = setName;
+		this.setName = setName;
 		this.documentId = documentId;
 		this.createdDate = createdDate;
         this.language1 = language1;
@@ -29,8 +28,8 @@ export class ELSet {
 		this.words = new Array<ELWordsPair>(0);
 	}
 
-    changeSetName(newName: string) { this.setname = newName; }
-	getSetName():string { return this.setname; }
+    changeSetName(newName: string) { this.setName = newName; }
+	getSetName():string { return this.setName; }
 
 	getDocumentId():string { return this.documentId; }
 
@@ -60,7 +59,7 @@ export class ELSet {
 
     getJSON():ELSetInterface {
         let setJSON: ELSetInterface = {
-			set_name: this.setname,
+			set_name: this.setName,
 			document_id: this.documentId,
 			created_date: this.createdDate,
 			language1: this.language1,
