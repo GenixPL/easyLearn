@@ -12,12 +12,12 @@ export interface ELSetInterface {
 
 
 export class ELSet {
-	private setName: string;
+	private setName: string; //TODO: zmienic na public i set setName
 	private documentId: string;
 	private createdDate: Date;	
     private language1: string;
     private language2: string;
-    private words: Array<ELWordsPair>;
+    private words: ELWordsPair[];
 
     constructor(setName:string, documentId: string, createdDate: Date, language1: string, language2: string) {
 		this.setName = setName;
@@ -81,6 +81,12 @@ export function getSetFromJSON(setJSON:ELSetInterface):ELSet {
 	setJSON.words.forEach((wordsPair:ELWordsPair) => {
 		newSet.addWords(wordsPair.word1, wordsPair.word2);
 	});
+
+	// let newSet:ELSet = { //TODO: ogarnac
+
+	// } 
+
+	// Object.assign(newSet, setJSON);
 
 	return newSet;
 }

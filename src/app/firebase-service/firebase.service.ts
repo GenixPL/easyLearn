@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { log } from '../logger/logger';
 
 
 @Injectable({
@@ -7,7 +8,9 @@ import { Injectable } from '@angular/core';
 
 export class FirebaseService {
 
-    constructor() { }
+    constructor() {
+        
+    }
 
     getString():string { return "DUPAAA"; }
 

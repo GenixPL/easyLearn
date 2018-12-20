@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Page } from 'tns-core-modules/ui/page/page';
 
 import { log } from '~/app/logger/logger';
+import { FirebaseService } from '~/app/firebase-service/firebase.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class MarketComponent implements OnInit {
 
 	processing = false;
 
-	constructor(private router: Router, private page: Page) {
+	constructor(private router: Router, private page: Page, private firebase:FirebaseService) {
 		page.actionBarHidden = true;
 	}
 
@@ -23,6 +24,6 @@ export class MarketComponent implements OnInit {
 
 	getDoc() {
 		this.processing = !this.processing;
-		log(`wee`);
+		log(this.firebase.getString());
 	}
 }

@@ -9,11 +9,17 @@ export interface ELUserInterface {
 	is_premium: boolean,
 	joined_date: Date,
 	nickname: string,
-	ranking: number,
+	ranking: number,	//TODO: ranking do jezyka
 	is_visible_joined_date: boolean,
 	is_visible_premium: boolean,
 	is_visible_ranking: boolean,
 	friends: ELFriendInterface[]
+
+	//TODO: add user default language
+	//TODO: strukture quizu wymyslic
+	//TODO: dodac czy chce powiadomienia
+	//TODO: dodac kategorie do quizow
+	//TODO: pomyslec czy jezyki moga sie miedzy sb quizowac
 }
 
 
