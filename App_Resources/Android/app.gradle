@@ -9,7 +9,7 @@ android {
   defaultConfig {  
     generatedDensities = []
     applicationId = "com.tempus.easyLearn" 
-	multiDexEnabled true
+	  multiDexEnabled true
     
     //override supported platforms
     // ndk {

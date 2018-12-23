@@ -1,22 +1,23 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
 import { AuthStateChangeListener, AuthStateData, firestore, User } from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { isUndefined } from 'util';
 import { log } from '../logger/logger';
-import { ELUser, ELUserInterface } from '../models/el-user';
 import { ELSet, ELSetInterface } from '../models/el-set';
 import { ELSetShortInfoInterface } from '../models/el-set-short-info';
+import { ELUser, ELUserInterface } from '../models/el-user';
 
 
 @Injectable({
     providedIn: 'root',
 })
 
-export class FirebaseService implements OnInit {
+export class FirebaseService {
 
     //TODO: enable change of password
     //TODO: inform about lack of the internet
+    //TODO: change the order of logs
 
     /* Publicly accesible object representing current user. */
     public user: ELUser;
@@ -37,18 +38,15 @@ export class FirebaseService implements OnInit {
     private userDocRef: firestore.DocumentReference;
 
     /* Function used to unsubscribe user's data fatches from firestore. */
-    private unsubscribeUserDoc;
+    private unsubscribeUserDoc: () => void;
 
-    constructor() { }
 
-    async ngOnInit() {
+    constructor() {
+        this.init();
+    }
+
+    private async init() {
         await this.initFirebase();
-        if (this.isLoggedIn == true) {
-            await this.subscribeForUserData();
-
-        } else {
-            //handle it somehow
-        }
     }
 
 
@@ -71,11 +69,13 @@ export class FirebaseService implements OnInit {
                     this.currentUser = userData.user;
                     this.isLoggedIn = true;
                     console.log(`+ user logged in`);
+                    this.subscribeForUserData();
 
                 } else {
                     this.currentUser = null;
                     this.isLoggedIn = false;
                     console.log(`+ user logged out`);
+                    this.unsubscribeUserDoc;
                 }
             }
         };
