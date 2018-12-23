@@ -2,9 +2,10 @@ import { isDefined } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'nativescript-plugin-firebase';
+import { User } from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
-import { User } from 'nativescript-plugin-firebase';
+import { FirebaseService } from '../firebase-service/firebase.service';
 
 
 @Component({
