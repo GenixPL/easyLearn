@@ -23,7 +23,5 @@ export class MarketComponent implements OnInit {
 	ngOnInit() { }
 
 	getDoc() {
-		this.processing = !this.processing;
-		log(this.firebase.getString());
 	}
 }

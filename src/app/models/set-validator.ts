@@ -4,12 +4,12 @@ import { isUndefined } from "util";
 import { log } from '../logger/logger';
 
 
-export interface ELValidationResult {
+export interface ELSetValidationResult {
 	is_valid: boolean,
 	err: string
 }
 
-export function validateSet(set: ELSetInterface):ELValidationResult {
+export function validateSet(set: ELSetInterface):ELSetValidationResult {
 	let result = {
 		is_valid: true,
 		err: ``

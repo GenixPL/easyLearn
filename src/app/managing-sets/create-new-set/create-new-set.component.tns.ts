@@ -1,17 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { registerElement } from 'nativescript-angular/element-registry';
-import * as firebase from 'nativescript-plugin-firebase';
+import { User } from 'nativescript-plugin-firebase';
 import * as Toast from 'nativescript-toast';
 import { Button } from 'tns-core-modules/ui/button';
 import { inputType, prompt, PromptOptions, PromptResult } from 'tns-core-modules/ui/dialogs';
 import { EventData } from 'tns-core-modules/ui/frame';
 import { Page } from 'tns-core-modules/ui/page';
-
-import { ELSetInterface, getSetFromJSON } from '../../models/el-set';
-import { createNewSetForUser } from '~/app/firebase-service/create-new-set';
 import { log } from '~/app/logger/logger';
-import { User } from 'nativescript-plugin-firebase';
-import { validateSet, ELValidationResult } from '~/app/models/set-validator';
+import { ELSetValidationResult, validateSet } from '~/app/models/set-validator';
+import { ELSetInterface } from '../../models/el-set';
+import { FirebaseService } from '~/app/firebase-service/firebase.service';
+
 
 
 registerElement("FilterableListpicker", () => require("nativescript-filterable-listpicker").FilterableListpicker);
@@ -33,7 +32,10 @@ export class CreateNewSetComponent implements OnInit {
 	private listItems = require('~/assets/languages.json');
 
 
-	constructor(private page: Page) {
+	constructor (
+		private page: Page,
+		private firebase: FirebaseService
+	) {
 		page.actionBarHidden = true;
 	}
 
@@ -84,19 +86,12 @@ export class CreateNewSetComponent implements OnInit {
 			words: [{ word1: "!", word2: "?" }] //TODO:remove this later
 		}
 
-		let result:ELValidationResult = validateSet(newSet);
+		let result: ELSetValidationResult = validateSet(newSet);
 		if (!result.is_valid) {
 			Toast.makeText(`${result.err}`, `long`).show();
 			return;
 		}
 
-		try {
-			let user: User = await firebase.getCurrentUser();
-			createNewSetForUser(newSet, user);
-
-		} catch (err) {
-			log(`✘ get current user`);
-		}
-
+		await this.firebase.addSetToUser(newSet);
 	}
 }

@@ -1,5 +1,6 @@
 import { User } from 'nativescript-plugin-firebase';
 import { ELFriendInterface } from './el-friend';
+import { ELSetShortInfoInterface } from './el-set-short-info';
 
 
 export interface ELUserInterface {
@@ -13,7 +14,8 @@ export interface ELUserInterface {
 	is_visible_joined_date: boolean,
 	is_visible_premium: boolean,
 	is_visible_ranking: boolean,
-	friends: ELFriendInterface[]
+	friends: ELFriendInterface[],
+	sets: ELSetShortInfoInterface[]
 
 	//TODO: add user default language
 	//TODO: strukture quizu wymyslic
@@ -35,6 +37,7 @@ export class ELUser {
 	private isVisiblePremium: boolean;
 	private isVisibleRanking: boolean;
 	private friends: ELFriendInterface[];
+	private sets: ELSetShortInfoInterface[];
 
 
 	constructor(userJSON: ELUserInterface) {
@@ -49,44 +52,45 @@ export class ELUser {
 		this.isVisiblePremium = userJSON.is_visible_premium;
 		this.isVisibleRanking = userJSON.is_visible_ranking;
 		this.friends = userJSON.friends;
+		this.sets = userJSON.sets;
 	}
 
-	getUID(): string { return this.uid; }
+	public getUID(): string { return this.uid; }
 
-	getEmail(): string { return this.email; }
+	public getEmail(): string { return this.email; }
 
-	changeAvatarId(newAvatarId: string) { this.avatarId = newAvatarId; }
-	getAvatarId(): string { return this.avatarId; }
+	public changeAvatarId(newAvatarId: string) { this.avatarId = newAvatarId; }
+	public getAvatarId(): string { return this.avatarId; }
 
-	getIsPremium(): boolean { return this.isPremium; }
-	changeIsPremium(newPremiumStatus: boolean) { this.isPremium = newPremiumStatus; }
+	public getIsPremium(): boolean { return this.isPremium; }
+	public changeIsPremium(newPremiumStatus: boolean) { this.isPremium = newPremiumStatus; }
 
-	getJoinedDate(): Date { return this.joinedDate; }
+	public getJoinedDate(): Date { return this.joinedDate; }
 
-	getNickname(): string { return this.nickname; }
-	changeNickname(newNickname: string) { this.nickname = newNickname; }
+	public getNickname(): string { return this.nickname; }
+	public changeNickname(newNickname: string) { this.nickname = newNickname; }
 
-	getRanking(): number { return this.ranking; }
-	changeRanking(newRanking: number) { this.ranking = newRanking; }
+	public getRanking(): number { return this.ranking; }
+	public changeRanking(newRanking: number) { this.ranking = newRanking; }
 
-	getIsVisibleJoinedDate(): boolean { return this.isVisibleJoinedDate; }
-	changeIsVisibleJoinedDate(newStatus: boolean) { this.isVisibleJoinedDate = newStatus; }
+	public getIsVisibleJoinedDate(): boolean { return this.isVisibleJoinedDate; }
+	public changeIsVisibleJoinedDate(newStatus: boolean) { this.isVisibleJoinedDate = newStatus; }
 
-	getIsVisiblePremium(): boolean { return this.isVisiblePremium; }
-	changeIsVisiblePremium(newStatus: boolean) { this.isVisiblePremium = newStatus; }
+	public getIsVisiblePremium(): boolean { return this.isVisiblePremium; }
+	public changeIsVisiblePremium(newStatus: boolean) { this.isVisiblePremium = newStatus; }
 
-	getIsVisibleRanking(): boolean { return this.isVisibleRanking; }
-	changeIsVisibleRanking(newStatus: boolean) { this.isVisibleRanking = newStatus; }
+	public getIsVisibleRanking(): boolean { return this.isVisibleRanking; }
+	public changeIsVisibleRanking(newStatus: boolean) { this.isVisibleRanking = newStatus; }
 
-	addFirend(newFriend: ELFriendInterface) {
-		this.friends.push(newFriend);
-	}
+	public getFriends(): ELFriendInterface[] { return this.friends; }
+	public addFriend(newFriend: ELFriendInterface) { this.friends.push(newFriend); }
+	public removeFriend(position: number) { this.friends.slice(position, 1); }
 
-	removeFriend(position: number) {
-		this.friends.slice(position, 1);
-	}
+	public getSets(): ELSetShortInfoInterface[] { return this.sets; }
+	public addSet(newSet: ELSetShortInfoInterface) { this.sets.push(newSet); }
+	public removeSet(position: number) { this.sets.slice(position, 1); }
 
-	getUserJSON(): ELUserInterface {
+	public toJSON(): ELUserInterface {
 		let user: ELUserInterface = {
 			uid: this.uid,
 			email: this.email,
@@ -98,28 +102,29 @@ export class ELUser {
 			is_visible_joined_date: this.isVisibleJoinedDate,
 			is_visible_premium: this.isVisiblePremium,
 			is_visible_ranking: this.isVisibleRanking,
-			friends: this.friends
+			friends: this.friends,
+			sets: this.sets
 		}
 
 		return user;
 	}
-}
 
+	public static getNewUserJSON(user: User): ELUserInterface {
+		let newUserJSON: ELUserInterface = {
+			uid: user.uid,
+			email: user.email || "",
+			avatar_id: "",
+			is_premium: false,
+			joined_date: new Date(),
+			nickname: "",
+			ranking: 1000,
+			is_visible_joined_date: true,
+			is_visible_premium: true,
+			is_visible_ranking: true,
+			friends: [],
+			sets: []
+		};
 
-export function getNewUserJSON(user: User) {
-	let newUserJSON: ELUserInterface = {
-		uid: user.uid,
-		email: user.email || "",
-		avatar_id: "",
-		is_premium: false,
-		joined_date: new Date(),
-		nickname: "",
-		ranking: 1000,
-		is_visible_joined_date: true,
-		is_visible_premium: true,
-		is_visible_ranking: true,
-		friends: []
+		return newUserJSON;
 	}
-
-	return newUserJSON;
 }

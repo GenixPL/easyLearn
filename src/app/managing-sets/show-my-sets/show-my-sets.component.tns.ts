@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Page } from 'tns-core-modules/ui/page/page';
-import * as firebase from 'nativescript-plugin-firebase';
-import { User } from 'nativescript-plugin-firebase';
-import * as Toast from 'nativescript-toast';
-
-import { getAllSetsForUser } from '~/app/firebase-service/get-sets';
+import { FirebaseService } from '~/app/firebase-service/firebase.service';
 import { log } from '~/app/logger/logger';
-import { isUndefined } from 'util';
-import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
- 
+import { ELSetShortInfoInterface } from '~/app/models/el-set-short-info';
+
 
 @Component({
 	selector: 'show-my-sets',
@@ -17,38 +12,19 @@ import { ELSet, getSetFromJSON, ELSetInterface } from '~/app/models/el-set';
 	styleUrls: ['./show-my-sets.component.css'],
 })
 
-export class ShowMySetsComponent implements OnInit {
+export class ShowMySetsComponent {
+	private userSets: ELSetShortInfoInterface[];
 
-	private currentUser: User;
-	private userSets: ELSet[] = new Array(0);
-
-	constructor(private router: Router, private page: Page) {
+	constructor(
+		private router: Router,
+		private page: Page,
+		private firebase: FirebaseService
+	) {
 		page.actionBarHidden = true;
+		this.userSets = this.firebase.user.getSets();
 	}
 
-	async ngOnInit() {
-		try {
-			this.currentUser = await firebase.getCurrentUser();
-
-		} catch (err) {
-			log(`✘ get current user`);
-			return;
-		}
-
-		if (isUndefined(this.currentUser)) {
-			log(`✘ current user is undefined`);
-			return;
-		}
-
-		try {
-			this.userSets = await getAllSetsForUser(this.currentUser);
-		} catch (err) {
-			log(`✘ get user sets`);
-			Toast.makeText(`${err} Try again.`);
-		}
-	}
-
-	pff(setId: string){
+	pff(setId: string) {
 		log(`holder: ${setId}`);
 	}
 

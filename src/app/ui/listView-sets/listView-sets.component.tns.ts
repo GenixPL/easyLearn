@@ -3,6 +3,7 @@ import { isDefined } from '@angular/compiler/src/util';
 
 import { ELSet } from '~/app/models/el-set';
 import { log } from '~/app/logger/logger';
+import { ELSetShortInfoInterface } from '~/app/models/el-set-short-info';
 
 
 @Component({
@@ -15,14 +16,14 @@ export class ListViewSetsComponent {
 	private sets: DisplayedInfo[] = new Array(0);
 
 	@Input('source')
-	set source(sets: ELSet[]) {
+	set source(sets: ELSetShortInfoInterface[]) {
 		if (isDefined(sets)) {
 			sets.forEach(set => {
 				let newSet:DisplayedInfo = {
-					setName: set.getSetName(),
-					image1: `~/images/flags/flag-${set.getFirstLanguage().toLowerCase()}.png`,
-					image2: `~/images/flags/flag-${set.getSecondLanguage().toLowerCase()}.png`,
-					setId: set.getDocumentId()
+					setName: set.set_name,
+					image1: `~/images/flags/flag-${set.language1.toLowerCase()}.png`,
+					image2: `~/images/flags/flag-${set.language2.toLowerCase()}.png`,
+					setId: set.document_id
 				};
 				this.sets.push(newSet);
 			});

@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit {
 
 		} else {
 			Toast.makeText(`user is undefined`, `long`).show();
-			log(`user is undefined`);
+			log(`- user is undefined`);
 		}
 	}
 }
