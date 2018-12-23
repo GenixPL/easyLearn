@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from 'nativescript-plugin-firebase';
-import { Page } from 'tns-core-modules/ui/page/page';
-
-import { createFilesForNewUser } from '~/app/firebase-service/create-user-files';
-import { User } from 'nativescript-plugin-firebase';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Page } from 'tns-core-modules/ui/page/page';
+import { FirebaseService } from '~/app/firebase-service/firebase.service';
+
 
 
 @Component({
@@ -17,7 +15,11 @@ export class GoogleAuthComponent implements OnInit {
 
 	private isUiEnabled: boolean = true;
 
-	constructor(private page: Page, private location:Location) {
+	constructor(
+		private page: Page,
+		private location: Location,
+		private firebase: FirebaseService
+	) {
 		page.actionBarHidden = true;
 	}
 
@@ -25,26 +27,13 @@ export class GoogleAuthComponent implements OnInit {
 
 	async logInWithGoogle() {
 		this.isUiEnabled = false;
-		firebase.logout();
 
-		try {
-			let user: User = await firebase.login({
-				type: firebase.LoginType.GOOGLE
-			});
-
-			console.log(`User logged in through google auth: ${JSON.stringify(user.email)}`);
-			if (user.additionalUserInfo.isNewUser) {
-				createFilesForNewUser(user);
-			}
-
-			if (this.location.path() == '/google-auth') {
-				this.location.back();
-			}
-
-		} catch (err) {
-			console.log(`Error occured during google auth: ${err}`);
-		}
+		await this.firebase.googleAuth();
 
 		this.isUiEnabled = true;
+
+		if (this.location.path() == '/google-auth') {
+			this.location.back();
+		}
 	}
 }

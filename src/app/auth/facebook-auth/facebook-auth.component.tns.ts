@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from 'nativescript-plugin-firebase';
-import { Page } from 'tns-core-modules/ui/page/page';
-
-import { createFilesForNewUser } from '~/app/firebase-service/create-user-files';
-import { User } from 'nativescript-plugin-firebase';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Page } from 'tns-core-modules/ui/page/page';
+import { FirebaseService } from '~/app/firebase-service/firebase.service';
+
 
 
 @Component({
@@ -15,9 +13,13 @@ import { Location } from '@angular/common';
 
 export class FacebookAuthComponent implements OnInit {
 
-	private isUiEnabled:boolean = true;
+	private isUiEnabled: boolean = true;
 
-	constructor(private page: Page, private location:Location) {
+	constructor(
+		private page: Page,
+		private location: Location,
+		private firebase: FirebaseService
+	) {
 		page.actionBarHidden = true;
 	}
 
@@ -25,27 +27,11 @@ export class FacebookAuthComponent implements OnInit {
 
 	async loginWithFacebook() {
 		this.isUiEnabled = false;
-		firebase.logout();
 
-		try {
-			let user: User = await firebase.login({
-				type: firebase.LoginType.FACEBOOK,
-				facebookOptions: {
-					scope: ['email']
-				}
-			});
+		await this.firebase.facebookAuth();
 
-			JSON.stringify(`User logged in through facebook auth: ${JSON.stringify(user.email)}`);
-			if (user.additionalUserInfo.isNewUser) {
-				createFilesForNewUser(user);
-			}
-			
-			if (this.location.path() == '/facebook-auth') {
-				this.location.back();
-			}
-			
-		} catch(err) {
-			console.log(`Error occured during facebook auth: ${err}`);
+		if (this.location.path() == '/facebook-auth') {
+			this.location.back();
 		}
 
 		this.isUiEnabled = true;
