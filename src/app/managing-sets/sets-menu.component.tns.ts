@@ -11,6 +11,8 @@ import { Page } from 'tns-core-modules/ui/page/page';
 
 export class SetsMenuComponent implements OnInit {
 
+	//TODO: there is unwanted behaviour if firebase inits in this place
+
   	constructor(private router:Router, private page:Page) { 
     	page.actionBarHidden = true;
   	}

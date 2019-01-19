@@ -7,6 +7,7 @@ import { log } from '../logger/logger';
 import { ELSet, ELSetInterface } from '../models/el-set';
 import { ELSetShortInfoInterface } from '../models/el-set-short-info';
 import { ELUser, ELUserInterface } from '../models/el-user';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Injectable({
@@ -40,6 +41,8 @@ export class FirebaseService {
     /* Function used to unsubscribe user's data fatches from firestore. */
     private unsubscribeUserDoc: () => void;
 
+    private setsInfo: SetDocInfo[] =  new Array<SetDocInfo>(0);
+
 
     constructor() {
         this.init();
@@ -72,10 +75,13 @@ export class FirebaseService {
                     this.subscribeForUserData();
 
                 } else {
-                    this.currentUser = null;
+                    this.currentUser = undefined;
                     this.isLoggedIn = false;
                     console.log(`+ user logged out`);
                     this.unsubscribeUserDoc;
+                    this.setsInfo.forEach(setInfo => {
+                        setInfo.unsubscribeSetDoc();
+                    });
                 }
             }
         };
@@ -186,7 +192,7 @@ export class FirebaseService {
                 log(`+ user signed up by google auth`);
 
             } else {
-                log(`- user signed in by google auth`);
+                log(`+ user signed in by google auth`);
             }
 
         } catch (err) {
@@ -225,10 +231,10 @@ export class FirebaseService {
                     log(`- user data fetch from firestore: such document doesn't exist`);
                 }
             });
-            log(`+ subscribe user document`);
+            log(`+ subscribe for user document`);
 
         } catch (err) {
-            log(`- subscribe user document: ${err}`);
+            log(`- subscribe for user document: ${err}`);
         }
     }
 
@@ -302,4 +308,56 @@ export class FirebaseService {
         return doc.id;
     }
 
+    //fucking frankenstein :D
+    public async getSetById(setId: string): Promise<ELSet> {
+
+        //return already fetched set if we have it
+        for (let i = 0; i < this.setsInfo.length; i++) {
+            if (this.setsInfo[i].set.getDocumentId() == setId) {
+                log(`+ get already fetched set`);
+                return this.setsInfo[i].set;
+            }
+        }
+
+        //or subscribe for new set and return it
+        return new Promise<ELSet>((resolve, reject) => {
+            let newSetInfo = new SetDocInfo();
+            try {
+                newSetInfo.setDocRef = this.privateSetsCollectionRef.doc(setId);
+                newSetInfo.unsubscribeSetDoc = newSetInfo.setDocRef.onSnapshot((doc) => {
+                    if (doc.exists) {
+                        newSetInfo.set = ELSet.getSetFromJSON(<ELSetInterface>doc.data());
+                        this.setsInfo.push(newSetInfo);
+                        log(`+ set data fetch from firestore`);
+                        resolve(newSetInfo.set);
+
+                    } else {
+                        log(`- set data fetch from firestore: such document doesn't exist`);
+                    }
+                });
+                log(`+ subscribe for set document`);
+
+            } catch (err) {
+                log(`- subscribe for set document: ${err}`);
+                reject(err);
+            }
+        });
+    }
+
+    public async saveSetChanges(set: ELSet) {
+        try {
+            await this.privateSetsCollectionRef.doc(set.getDocumentId()).set(set.toJSON());
+            log(`+ save set changes`);
+
+        } catch (err) {
+            log(`- save set changes: ${err}`);
+        }
+    }
+
+}
+
+class SetDocInfo {
+    public set: ELSet;
+    public setDocRef: firestore.DocumentReference;
+    public unsubscribeSetDoc: () => void;
 }

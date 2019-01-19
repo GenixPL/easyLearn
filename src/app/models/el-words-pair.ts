@@ -6,8 +6,8 @@ export interface ELWordsPairInterface {
 }
 
 export class ELWordsPair {
-    word1: string;
-    word2: string;
+    public word1: string;
+    public word2: string;
 
     constructor(word1: string, word2: string) {
         this.word1 = word1;

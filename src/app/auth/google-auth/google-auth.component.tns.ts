@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Page } from 'tns-core-modules/ui/page/page';
-import { FirebaseService } from '~/app/firebase-service/firebase.service';
+import { FirebaseService } from '~/app/services/firebase.service';
 
 
 

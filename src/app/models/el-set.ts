@@ -41,7 +41,7 @@ export class ELSet {
 	public changeSecondLanguage(newLanguage: string) { this.language2 = newLanguage; }
 	public getSecondLanguage(): string { return this.language2; }
 
-	public getWords(): Array<ELWordsPair> { return this.words; }
+	public getWords(): ELWordsPair[] { return this.words; }
 
 	public addWords(word1: string, word2: string) {
 		let words = new ELWordsPair(word1, word2);

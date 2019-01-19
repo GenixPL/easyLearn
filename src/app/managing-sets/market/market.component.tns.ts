@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Page } from 'tns-core-modules/ui/page/page';
 
 import { log } from '~/app/logger/logger';
-import { FirebaseService } from '~/app/firebase-service/firebase.service';
+import { FirebaseService } from '~/app/services/firebase.service';
 
 
 @Component({

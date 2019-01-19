@@ -9,7 +9,8 @@ import { Page } from 'tns-core-modules/ui/page';
 import { log } from '~/app/logger/logger';
 import { ELSetValidationResult, validateSet } from '~/app/models/set-validator';
 import { ELSetInterface } from '../../models/el-set';
-import { FirebaseService } from '~/app/firebase-service/firebase.service';
+import { FirebaseService } from '~/app/services/firebase.service';
+import { Location } from '@angular/common';
 
 
 
@@ -34,6 +35,7 @@ export class CreateNewSetComponent implements OnInit {
 
 	constructor (
 		private page: Page,
+		private location: Location,
 		private firebase: FirebaseService
 	) {
 		page.actionBarHidden = true;
@@ -93,5 +95,6 @@ export class CreateNewSetComponent implements OnInit {
 		}
 
 		await this.firebase.addSetToUser(newSet);
+		this.location.back();
 	}
 }

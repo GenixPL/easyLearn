@@ -2,36 +2,38 @@
 	
 	<StackLayout orientation="horizontal">
 			<Label text="Set name:" textWrap="true"></Label>
-			<TextView hint="" text="" editable="true"></TextView>
+			<TextView hint="" [text]="set.getSetName()" editable="true"></TextView>
 	</StackLayout>
 	
 
 	<StackLayout orientation="horizontal">
 			<Label text="First language:" textWrap="true"></Label>
-			<TextView hint="" text="" editable="true"></TextView>
+			<TextView hint="" [text]="set.getFirstLanguage()" editable="true"></TextView>
 	</StackLayout>
 	
 
 	<StackLayout orientation="horizontal">
 			<Label text="Second language:" textWrap="true"></Label>
-			<TextView hint="" text="" editable="true"></TextView>
+			<TextView hint="" [text]="set.getSecondLanguage()" editable="true"></TextView>
 	</StackLayout>
 
 
 	<StackLayout>
 			<Label text="Words" textWrap="true"></Label>
-			<ListView items="[a, b, s]" class="list-group">
+			<ListView [items]="set.getWords()" class="list-group">
 				<ng-template let-item="item" let-odd="odd" let-even="even">
-				  <StackLayout>
-					<Label text="item" class="list-group-item"></Label>
-					
-				  </StackLayout>
+
+					<StackLayout orientation="horizontal">
+							<Label [text]="item.word1" class="list-group-item"></Label>
+							<Label [text]="item.word2" class="list-group-item"></Label>
+					</StackLayout>
+
 				</ng-template>
 			</ListView>
 	</StackLayout>
 
 
-	<!-- <Button text="Save" (tap)="saveSet()"></Button>  I cant see it -->
+	<Button text="Save" (tap)="saveSet()"></Button>  I cant see it
 		
 	
 </StackLayout>

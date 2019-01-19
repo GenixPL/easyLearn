@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Toast from 'nativescript-toast';
 import { Page } from 'tns-core-modules/ui/page/page';
-import { FirebaseService } from '../firebase-service/firebase.service';
+import { FirebaseService } from '~/app/services/firebase.service';
 import { log } from '../logger/logger';
 import { ELUser } from '../models/el-user';
 
