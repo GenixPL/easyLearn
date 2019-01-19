@@ -48,6 +48,10 @@ export class FirebaseService {
         this.init();
     }
 
+    public createService() {
+        
+    }
+
     private async init() {
         await this.initFirebase();
     }
@@ -137,6 +141,7 @@ export class FirebaseService {
 
         try {
             await firebase.logout();
+            this.user = undefined;
             log(`+ sign out user`);
 
         } catch (err) {

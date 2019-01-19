@@ -1,21 +1,24 @@
-<StackLayout>
+<StackLayout verticalAlignment="center">
 
-    <StackLayout orientation="horizontal">
-        <Label text="Set name: {{newSetName}}" textWrap="true"></Label>
-        <Button text="Change set name" (tap)="changeSetNameDialog()"></Button>
-    </StackLayout>
-    
-    <StackLayout orientation="horizontal">
-        <Label text="First language: {{language1}}"></Label>
-        <Button id="1" text="Choose a Language" (tap)="showPicker($event)"></Button>
+    <StackLayout class="btn-img" orientation="horizontal">
+        <Image height="80%" src="res://ic_pencil_black" (tap)="changeSetNameDialog()"></Image>
+        <Label verticalAlignment="center" text="Set name: {{newSetName}}"></Label>
     </StackLayout>
 
-    <StackLayout orientation="horizontal">
-            <Label text="Second language: {{language2}}"></Label>
-            <Button id="2" text="Choose a Language" (tap)="showPicker($event)"></Button>
+    <StackLayout class="btn-img" orientation="horizontal">
+        <Image height="80%" id="1" src="res://ic_pencil_black" (tap)="showPicker($event)"></Image>
+        <Label verticalAlignment="center" text="First language: {{language1}}"></Label>
     </StackLayout>
-    
-    <Button text="Save set" (tap)="saveSet()"></Button>
-    
+
+    <StackLayout class="btn-img" orientation="horizontal">
+        <Image height="80%" id="2" src="res://ic_pencil_black" (tap)="showPicker($event)"></Image>
+        <Label verticalAlignment="center" text="Second language: {{language2}}"></Label>
+    </StackLayout>
+
+    <StackLayout class="btn-img" orientation="horizontal" horizontalAlignment="center">
+        <Image src="res://ic_content_save_black" (tap)="saveSet()" horizontalAlignment="center"></Image>
+    </StackLayout>
+
 </StackLayout>
-<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listItems" (canceled)="cancelFilterableList($event)" (itemTapped)="itemTapped($event)"></FilterableListpicker>
+<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listItems" (canceled)="cancelFilterableList($event)"
+    (itemTapped)="itemTapped($event)"></FilterableListpicker>

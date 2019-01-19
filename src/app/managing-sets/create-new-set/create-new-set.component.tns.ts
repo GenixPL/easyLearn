@@ -11,6 +11,7 @@ import { ELSetValidationResult, validateSet } from '~/app/models/set-validator';
 import { ELSetInterface } from '../../models/el-set';
 import { FirebaseService } from '~/app/services/firebase.service';
 import { Location } from '@angular/common';
+import { Image } from 'tns-core-modules/ui/image/image';
 
 
 
@@ -22,11 +23,11 @@ registerElement("FilterableListpicker", () => require("nativescript-filterable-l
 	styleUrls: ['./create-new-set.component.css']
 })
 
-export class CreateNewSetComponent implements OnInit {
+export class CreateNewSetComponent {
 
 	@ViewChild('myfilter') myfilter: ElementRef;
 
-	private newSetName: string = "set-name";
+	private newSetName: string;
 	private language1: string;
 	private language2: string;
 	private lastLanguage: string;
@@ -41,8 +42,6 @@ export class CreateNewSetComponent implements OnInit {
 		page.actionBarHidden = true;
 	}
 
-	ngOnInit() {
-	}
 
 	changeSetNameDialog() {
 		let options: PromptOptions = {
@@ -74,7 +73,7 @@ export class CreateNewSetComponent implements OnInit {
 	showPicker(event: EventData) {
 		this.myfilter.nativeElement.show();
 
-		let btn = <Button>event.object
+		let btn = <Image>event.object
 		this.lastLanguage = btn.id;
 	}
 

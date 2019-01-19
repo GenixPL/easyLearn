@@ -1,5 +1,17 @@
-<StackLayout  class="p-20">
-    <Label text="MENU" class="h1 text-center" textWrap="true"></Label>
-	<Button text="Manage Sets" (tap)="moveToSetsMenuComponent()"></Button>
-	<Button text="Auth" (tap)="moveToAuthComponent()"></Button>
-</StackLayout>
+<GridLayout columns="1*" rows="1*, 3*, 1*">
+	<Label  col="0" row="0" text="MENU" class="h1 text-center" textWrap="true" verticalAlignment="center"></Label>
+
+	<StackLayout col="0" row="1">
+		<GridLayout rows="1*, 1*, 1*" columns="1*, 3*, 1*">
+			<Button class="btn-img" col="1" row="1" text="Manage Sets" (tap)="moveToSetsMenuComponent()" [isEnabled]="isUiEnabled" verticalAlignment="top"></Button>
+		</GridLayout>
+	</StackLayout>
+
+	<StackLayout col="0" row="2" class="btn-img" orientation="horizontal" padding="5" (tap)="moveToAuthComponent()" horizontalAlignment="stretch"
+	 verticalAlignment="bottom">
+		<Label verticalAlignment="center" text="You have to sign in" textWrap="true" [visibility]="isUiEnabled ? 'collapsed' : 'visible'"></Label>
+		<Label verticalAlignment="center" [text]="loggedUser" textWrap="true" [visibility]="isUiEnabled ? 'visible' : 'collapsed'"></Label>
+		<Image src="res://ic_account_black" width="15%" height="100%" horizontalAlignment="right"></Image>
+	</StackLayout>
+
+</GridLayout>

@@ -1,10 +1,10 @@
-<StackLayout  class="p-20">
+<GridLayout columns="1*" rows="12*, 1*">
 
-    <Label text="SETS MENU" class="h1 text-center" textWrap="true"></Label>
-    <Button text="Create new set" (tap)="moveToCreateNewSetComponent()"></Button>
-	<Button text="Market" (tap)="moveToMarketComponent()"></Button>
-	<Button text="Show my sets" (tap)="moveToShowMySetsComponent()"></Button>
-	<Button text="Manage set(direct to be deleted)" (tap)="moveToManageSetComponent()"></Button>
-	
+	<listView-sets column="0" row="0" [source]="userSets" (getSetIdOnTap)="listItemTapped($event)" height="90%"></listView-sets>
 
-</StackLayout>
+	<StackLayout column="0" row="1" class="btn-img" orientation="horizontal" padding="5" (tap)="moveToCreateNewSetComponent()"
+	 horizontalAlignment="center" verticalAlignment="center">
+		<Image src="res://ic_plus_circle_outline_black" width="15%" height="100%"></Image>
+	</StackLayout>
+
+</GridLayout>

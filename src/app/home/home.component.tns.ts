@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Page } from 'tns-core-modules/ui/page/page';
 import { FirebaseService } from '../services/firebase.service';
+import { log } from '../logger/logger';
+import { delay } from 'q';
 
 
 @Component({
@@ -10,19 +12,26 @@ import { FirebaseService } from '../services/firebase.service';
 	styleUrls: ['./home.component.css'],
 })
 
-export class HomeComponent implements OnInit {
-	title = 'easyLearn';
-	private loggedUser: string;
+export class HomeComponent {
 
-	constructor(private router: Router, private page: Page, private firebase: FirebaseService) {
+	isUiEnabled: boolean = false;
+	loggedUser: string;
+
+	constructor(private router: Router, private page: Page, private ngZone: NgZone, private firebase: FirebaseService) {
 		page.actionBarHidden = true;
+
+		this.page.on("navigatedTo", async () => {
+			await this.checkIfUserIsLoggedIn();
+		});
 	}
 
-	ngOnInit() {
-		if (this.firebase.user == undefined) {
+	async checkIfUserIsLoggedIn() {
+		if (this.firebase.user === undefined) {
+			this.isUiEnabled = false;
 			this.router.navigate(["auth"]);
-			
+
 		} else {
+			this.isUiEnabled = true;
 			this.loggedUser = this.firebase.user.getEmail();
 		}
 	}

@@ -7,6 +7,7 @@ import { FirebaseService } from '~/app/services/firebase.service';
 import { log } from '../logger/logger';
 import { ELUser } from '../models/el-user';
 import { Location } from '@angular/common';
+import { HomeComponent } from '../home/home.component.tns';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { Location } from '@angular/common';
 	styleUrls: ['./auth.component.css']
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
 	private isUiEnabled: boolean = true;
 
@@ -23,9 +24,7 @@ export class AuthComponent implements OnInit {
 		page.actionBarHidden = true;
 	}
 
-	ngOnInit() { }
-
-
+	
 	async signInWithEmailPassword() {
 		this.isUiEnabled = false;
 
@@ -40,7 +39,7 @@ export class AuthComponent implements OnInit {
 			Toast.makeText(`You are signed in.`, "long").show();
 
 			if (this.location.path() == '/auth') {
-				this.location.back();
+				this.router.navigate(["home"]);
 			}
 
 		} catch (err) {
@@ -69,7 +68,7 @@ export class AuthComponent implements OnInit {
 			Toast.makeText(`You are signed in.`, "long").show();
 
 			if (this.location.path() == '/auth') {
-				this.location.back();
+				this.router.navigate(["home"]);
 			}
 
 		} catch (err) {
@@ -95,7 +94,7 @@ export class AuthComponent implements OnInit {
 			Toast.makeText(`You are signed in.`, "long").show();
 
 			if (this.location.path() == '/auth') {
-				this.location.back();
+				this.router.navigate(["home"]);
 			}
 
 		} catch (err) {
@@ -116,7 +115,7 @@ export class AuthComponent implements OnInit {
 			Toast.makeText(`You are signed in.`, "long").show();
 
 			if (this.location.path() == '/auth') {
-				this.location.back();
+				this.router.navigate(["home"]);
 			}
 
 		} catch (err) {

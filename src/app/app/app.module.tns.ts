@@ -5,6 +5,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { AppRoutingModule } from './app-routing.module.tns';
 import { AppComponent } from './app.component.tns';
 import { components } from './app.routes.tns';
+import { FirebaseService } from '../services/firebase.service';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 // import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
@@ -12,16 +13,20 @@ import { components } from './app.routes.tns';
 
 @NgModule({
   declarations: [
-	components
+    components
   ],
   imports: [
     NativeScriptModule,
-	AppRoutingModule,
-	NativeScriptFormsModule
+    AppRoutingModule,
+    NativeScriptFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
 
-export class AppModule { }
+export class AppModule { 
+  constructor (private firebase:FirebaseService) {
+    this.firebase.createService();
+  }
+}
