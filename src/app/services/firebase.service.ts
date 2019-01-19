@@ -104,13 +104,7 @@ export class FirebaseService {
 
         } catch (err) {
             log(`- sign up user by email and password: ${err}`);
-
-            let errMassage: string = JSON.stringify(err);
-            if (errMassage.includes("FirebaseAuthUserCollisionException")) {
-                Toast.makeText(`ERROR: Account with the email: ${email} already exists.`, "long").show();
-            } else {
-                Toast.makeText(`ERROR: Some error occured during signing up, please try again.`, "long").show();
-            }
+            throw (err);
         }
     }
 
@@ -129,9 +123,8 @@ export class FirebaseService {
             log(`+ sign in user by email and password`);
 
         } catch (err) {
-            log(`- sign in user by email and password: ${err}`);
-
-            Toast.makeText(`ERROR: Some error occured during signing in, please try again.`, "long").show();
+            log(`- sign in user by email and password: ${err}`); 
+            throw (err);
         }
     }
 
@@ -147,7 +140,8 @@ export class FirebaseService {
             log(`+ sign out user`);
 
         } catch (err) {
-            log(`- sign out user: ${err}`);
+            log(`- sign out user: ${err}`); 
+            throw (err);
         }
     }
 
@@ -173,8 +167,7 @@ export class FirebaseService {
 
         } catch (err) {
             log(`- facebook auth: ${err}`);
-
-            Toast.makeText(`ERROR: Some error occured during facebook authentication, please try again.`, "long").show();
+            throw(err);
         }
     }
 
@@ -197,8 +190,7 @@ export class FirebaseService {
 
         } catch (err) {
             log(`- google auth: ${err}`);
-
-            Toast.makeText(`ERROR: Some error occured during google authentication, please try again.`, "long").show();
+            throw (err);
         }
     }
 
