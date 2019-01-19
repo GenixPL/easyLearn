@@ -12,7 +12,7 @@ import { FirebaseService } from './firebase.service';
 
 export class ChangeSetService {
 
-    private currentSet: ELSet;
+    public currentSet: ELSet;
 
     constructor(
         private router: Router,
@@ -21,13 +21,14 @@ export class ChangeSetService {
     ) {
     }
 
-    public async displaySet(setId: string) {
+    public async displayManagingSet(setId: string) {
         this.currentSet = await this.firebase.getSetById(setId);
         this.router.navigate(["manage-set"]);
     }
 
-    public getCurrentSet(): ELSet {
-        return this.currentSet;
+    public async displayLearningSet(setId: string) {
+        this.currentSet = await this.firebase.getSetById(setId);
+        this.router.navigate(["display-set"]);
     }
 
     public async saveSet(set: ELSet) {

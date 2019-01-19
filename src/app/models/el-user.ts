@@ -1,6 +1,8 @@
 import { User } from 'nativescript-plugin-firebase';
 import { ELFriendInterface } from './el-friend';
 import { ELSetShortInfoInterface } from './el-set-short-info';
+import { ELSet } from './el-set';
+import { log } from '~/app/logger/logger';
 
 
 export interface ELUserInterface {
@@ -88,7 +90,30 @@ export class ELUser {
 
 	public getSets(): ELSetShortInfoInterface[] { return this.sets; }
 	public addSet(newSet: ELSetShortInfoInterface) { this.sets.push(newSet); }
+	public changeSet(set: ELSet) {
+		let replacement: ELSetShortInfoInterface = {
+			set_name: set.getSetName(),
+			document_id: set.getDocumentId(),
+			language1: set.getFirstLanguage(),
+			language2: set.getSecondLanguage(),
+			created_date: set.getCreatedDate()
+		};
+
+		for (let i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].document_id == set.getDocumentId()) {
+				this.sets[i] = replacement;
+			}
+		}
+	}
 	public removeSet(position: number) { this.sets.slice(position, 1); }
+	public removeSetById(setId: string) {
+		for (let i = 0; i < this.sets.length; i++) {
+			if (this.sets[i].document_id == setId) {
+				log(this.sets[i].set_name);
+				this.removeSet(i);
+			}
+		}
+	}
 
 	public toJSON(): ELUserInterface {
 		let user: ELUserInterface = {

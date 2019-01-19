@@ -25,8 +25,4 @@ import { FirebaseService } from '../services/firebase.service';
   schemas: [NO_ERRORS_SCHEMA]
 })
 
-export class AppModule { 
-  constructor (private firebase:FirebaseService) {
-    this.firebase.createService();
-  }
-}
+export class AppModule {}

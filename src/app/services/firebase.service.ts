@@ -48,10 +48,6 @@ export class FirebaseService {
         this.init();
     }
 
-    public createService() {
-        
-    }
-
     private async init() {
         await this.initFirebase();
     }
@@ -343,11 +339,25 @@ export class FirebaseService {
 
     public async saveSetChanges(set: ELSet) {
         try {
+            this.user.changeSet(set);
+            await this.saveUserChanges();
             await this.privateSetsCollectionRef.doc(set.getDocumentId()).set(set.toJSON());
             log(`+ save set changes`);
 
         } catch (err) {
             log(`- save set changes: ${err}`);
+        }
+    }
+
+    public async removeSet(set: ELSet) {
+        try {
+            this.user.removeSetById(set.getDocumentId());
+            await this.saveUserChanges();
+            await this.privateSetsCollectionRef.doc(set.getDocumentId()).delete();
+            log(`+ delete set`);
+
+        } catch (err) {
+            log(`- delete set: ${err}`);
         }
     }
 

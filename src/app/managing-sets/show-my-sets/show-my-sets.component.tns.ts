@@ -30,7 +30,7 @@ export class ShowMySetsComponent implements OnInit {
 	}
 
 	listItemTapped(setId: string) {
-		this.changeSetService.displaySet(setId);
+		this.changeSetService.displayManagingSet(setId);
 	}
 
 }

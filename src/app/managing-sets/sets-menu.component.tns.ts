@@ -4,6 +4,7 @@ import { Page } from 'tns-core-modules/ui/page/page';
 import { ELSetShortInfoInterface } from '../models/el-set-short-info';
 import { FirebaseService } from '../services/firebase.service';
 import { ChangeSetService } from '../services/change-set.service';
+import { log } from '../logger/logger';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SetsMenuComponent {
 	}
 
 	listItemTapped(setId: string) {
-		this.changeSetService.displaySet(setId);
+		this.changeSetService.displayManagingSet(setId);
 	}
 
 	moveToCreateNewSetComponent() {

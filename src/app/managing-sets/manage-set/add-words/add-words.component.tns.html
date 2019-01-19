@@ -1,0 +1,17 @@
+<StackLayout verticalAlignment="center">
+
+    <StackLayout class="btn-img" orientation="horizontal">
+        <Label text="First word:" textWrap="true" verticalAlignment="center"></Label>
+        <TextField hint="Type first word..." [(ngModel)]="word1" width="100%"></TextField>
+    </StackLayout>
+
+    <StackLayout class="btn-img" orientation="horizontal">
+        <Label text="Second word:" textWrap="true" verticalAlignment="center"></Label>
+        <TextField hint="Type second word..." [(ngModel)]="word2" width="100%"></TextField>
+    </StackLayout>
+
+    <StackLayout class="btn-img" height="10%" horizontalAlignment="center">
+        <Image src="res://ic_content_save_black" (tap)="addWords()" horizontalAlignment="center"></Image>
+    </StackLayout>
+    
+</StackLayout>

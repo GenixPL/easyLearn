@@ -22,11 +22,14 @@ export class HomeComponent {
 
 		this.page.on("navigatedTo", async () => {
 			await this.checkIfUserIsLoggedIn();
+			this.ngZone.run(() => {
+				//Do whatever you want here
+			})
 		});
 	}
 
 	async checkIfUserIsLoggedIn() {
-		if (this.firebase.user === undefined) {
+		if (this.firebase.user == undefined) {
 			this.isUiEnabled = false;
 			this.router.navigate(["auth"]);
 
@@ -42,6 +45,10 @@ export class HomeComponent {
 
 	moveToAuthComponent() {
 		this.router.navigate(["auth"]);
+	}
+
+	moveToDisplaySetsComponent() {
+		this.router.navigate(["display-sets"]);
 	}
 
 }
