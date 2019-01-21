@@ -11,7 +11,8 @@
     </StackLayout>
 
     <StackLayout class="btn-img" orientation="horizontal">
-        <Label verticalAlignment="center" text="SHOW TRANSLATION" ></Label>
+        <Image height="80%" id="2" src="res://ic_pencil_black" (tap)="showPicker($event)"></Image>
+        <Label verticalAlignment="center" text="Second language: {{language2}}"></Label>
     </StackLayout>
 
     <StackLayout class="btn-img" orientation="horizontal" horizontalAlignment="center">
