@@ -1,0 +1,25 @@
+list-view-layout {
+	height: 150px;
+}
+
+Image {
+	height: 150px;
+	width: 150px;
+	border-radius: 20%;
+}
+
+#left-image {
+	padding: 5%, 5%, 5%, 5%;
+}
+
+#right-image {
+	padding: 5%, 5%, 5%, 5%;
+}
+
+Label {
+	height: 100%;
+	width: 100%;
+	margin-top: 35%;
+	font-size: 24px;
+	padding: 0, 0, 0, 5%;
+}

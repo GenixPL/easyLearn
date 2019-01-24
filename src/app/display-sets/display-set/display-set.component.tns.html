@@ -1,0 +1,12 @@
+<StackLayout verticalAlignment="center">
+
+    <Label class="label" [text]="currentWord1" textWrap="true" horizontalAlignment="center"></Label>
+    <Label class="label2" [text]="currentWord2" textWrap="true" horizontalAlignment="center"></Label>
+
+    <Label class="label" [text]="" horizontalAlignment="center"></Label>
+
+    <StackLayout class="btn-img" orientation="horizontal" (tap)="moveToNextWord()" horizontalAlignment="center">
+        <Label verticalAlignment="center" [text]="btnText"></Label>
+    </StackLayout>
+
+</StackLayout>

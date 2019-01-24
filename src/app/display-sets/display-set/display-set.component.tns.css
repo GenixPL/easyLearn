@@ -1,0 +1,29 @@
+.btn-img {
+    border-radius: 5;
+    border-width: 1;
+    color: black;
+    margin: 10;
+    font-size: 16;
+    border-color: white;
+    background-color: white;
+}
+
+.label {
+    border-radius: 5;
+    border-width: 1;
+    color: black;
+    margin: 10;
+    font-size: 22;
+    border-color: white;
+    background-color: white;
+}
+
+.label2 {
+    border-radius: 5;
+    border-width: 1;
+    color: black;
+    margin: 10;
+    font-size: 18;
+    border-color: white;
+    background-color: white;
+}

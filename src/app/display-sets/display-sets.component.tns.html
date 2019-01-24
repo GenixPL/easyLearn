@@ -1,0 +1,4 @@
+<StackLayout class="btn-img">
+    <Label text="Choose set:" horizontalAlignment="center"></Label>
+    <listView-sets column="0" row="0" [source]="userSets" (getSetIdOnTap)="listItemTapped($event)" height="90%"></listView-sets>
+</StackLayout>

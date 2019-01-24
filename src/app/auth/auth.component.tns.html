@@ -1,0 +1,43 @@
+<StackLayout verticalAlignment="center">
+
+	<Image src="res://ic_salute_black" width="20%" height="20%"></Image>
+
+
+	<StackLayout class="btn-img" orientation="horizontal" padding="5" (tap)="signInWithGoogle()"
+	 horizontalAlignment="center" verticalAlignment="center">
+		<Image src="res://ic_google_black" width="15%" height="100%"></Image>
+		<Label text="Sign in with Google" verticalAlignment="center"></Label>
+	</StackLayout>
+
+	<StackLayout class="btn-img" orientation="horizontal" padding="5" (tap)="signInWithFacebook()"
+	 horizontalAlignment="center" verticalAlignment="center">
+		<Image src="res://ic_facebook_black" width="15%" height="100%"></Image>
+		<Label text="Sign in with Facebook" verticalAlignment="center"></Label>
+	</StackLayout>
+
+	<Label text=" " textWrap="true"></Label>
+	<Label text=" " textWrap="true"></Label>
+
+	<StackLayout class="btn-img" orientation="horizontal" padding="5" (tap)="signInWithEmailPassword()"
+	 horizontalAlignment="center" verticalAlignment="center">
+		<Image src="res://ic_login_variant_black" width="15%" height="100%"></Image>
+		<Label text="Sign in with Email & Password" verticalAlignment="center"></Label>
+	</StackLayout>
+
+	<StackLayout class="btn-img" orientation="horizontal" padding="5" (tap)="signUpWithEmailPassword()"
+	 horizontalAlignment="center" verticalAlignment="center">
+		<Image src="res://ic_account_plus_black" width="15%" height="100%"></Image>
+		<Label text="Sign up with Email & Password" verticalAlignment="center"></Label>
+	</StackLayout>
+
+	<Label text=" " textWrap="true"></Label>
+	<Label text=" " textWrap="true"></Label>
+
+	<StackLayout class="btn-img" orientation="horizontal" padding="5" (tap)="signOut()" horizontalAlignment="center"
+	 verticalAlignment="center">
+		<Image src="res://ic_logout_variant_black" width="15%" height="100%"></Image>
+		<Label text="Sign out" verticalAlignment="center"></Label>
+	</StackLayout>
+
+</StackLayout>
+<ActivityIndicator color="black" [busy]="!isUiEnabled" width="100" height="100"></ActivityIndicator>

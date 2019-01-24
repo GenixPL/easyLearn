@@ -1,0 +1,44 @@
+<StackLayout verticalAlignment="center">
+
+	<StackLayout class="btn-img" height="7%" orientation="horizontal">
+		<Image height="80%" src="res://ic_pencil_black" (tap)="changeSetNameDialog()"></Image>
+		<Label verticalAlignment="center" text="Set name: {{set.getSetName()}}"></Label>
+	</StackLayout>
+
+	<StackLayout class="btn-img" height="7%" orientation="horizontal">
+		<Image height="80%" id="1" src="res://ic_pencil_black" (tap)="showPicker($event)"></Image>
+		<Label verticalAlignment="center" text="First language: {{set.getFirstLanguage()}}"></Label>
+	</StackLayout>
+
+	<StackLayout class="btn-img" height="7%" orientation="horizontal">
+		<Image height="80%" id="2" src="res://ic_pencil_black" (tap)="showPicker($event)"></Image>
+		<Label verticalAlignment="center" text="Second language: {{set.getSecondLanguage()}}"></Label>
+	</StackLayout>
+
+
+	<StackLayout height="60%">
+		<StackLayout class="btn-img" orientation="horizontal">
+			<Image height="80%" src="res://ic_plus_circle_outline_black" (tap)="addWords()" horizontalAlignment="left"></Image>
+			<Label verticalAlignment="center" text="Add words" textWrap="true"></Label>
+		</StackLayout>
+
+		<ListView [items]="set.getWords()" class="list-group"> 
+			<ng-template let-item="item" let-odd="odd" let-even="even">
+
+				<StackLayout orientation="horizontal">
+					<Label [text]="item.word1" class="list-group-item"></Label>
+					<Label [text]="item.word2" class="list-group-item"></Label>
+				</StackLayout>
+
+			</ng-template>
+		</ListView>
+	</StackLayout>
+
+
+	<StackLayout class="btn-img" height="10%" horizontalAlignment="center">
+		<Image src="res://ic_content_save_black" (tap)="saveSet()" horizontalAlignment="center"></Image>
+	</StackLayout>
+
+</StackLayout>
+<FilterableListpicker #myfilter blur="light" hintText="Type to filter..." [source]="listItems" (canceled)="cancelFilterableList($event)"
+ (itemTapped)="itemTapped($event)"></FilterableListpicker>

@@ -1,0 +1,10 @@
+.btn-img {
+    border-radius: 5;
+    border-width: 1;
+    color: black;
+    margin: 10;
+    font-size: 16;
+    border-color: white;
+    background-color: white;
+    height: 50;
+}

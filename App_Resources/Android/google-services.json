@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "285713460337",
+    "firebase_url": "https://easylearn-58579.firebaseio.com",
+    "project_id": "easylearn-58579",
+    "storage_bucket": "easylearn-58579.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285713460337:android:ed5d094d7baf7c68",
+        "android_client_info": {
+          "package_name": "com.tempus.easyLearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285713460337-pi3ulvg8k7eath9cdi85p805qk5out91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tempus.easyLearn",
+            "certificate_hash": "8499b3810843cbac7537a9a5f0b0d9a4a7ff780a"
+          }
+        },
+        {
+          "client_id": "285713460337-r7qaalu916auqk75u0oi33esd374ii35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH370fE5RxzO5nZeaWu3CQ-qA-Mz00jh0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285713460337-r7qaalu916auqk75u0oi33esd374ii35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

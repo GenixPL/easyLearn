@@ -1,0 +1,6 @@
+<StackLayout>
+	<Label text="My sets:" textWrap="false"></Label>
+
+	<listView-sets [source]="userSets" (getSetIdOnTap)="listItemTapped($event)"></listView-sets>
+
+</StackLayout>
