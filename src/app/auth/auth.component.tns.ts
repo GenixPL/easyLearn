@@ -1,13 +1,13 @@
+import { Location } from '@angular/common';
 import { isDefined } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Toast from 'nativescript-toast';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 import { Page } from 'tns-core-modules/ui/page/page';
 import { FirebaseService } from '~/app/services/firebase.service';
 import { log } from '../logger/logger';
 import { ELUser } from '../models/el-user';
-import { Location } from '@angular/common';
-import { HomeComponent } from '../home/home.component.tns';
 
 
 @Component({
@@ -24,63 +24,67 @@ export class AuthComponent {
 		page.actionBarHidden = true;
 	}
 
-	
+
 	async signInWithEmailPassword() {
-		this.isUiEnabled = false;
-
-		let email: string = "dupjhfgjha@o2.pl";
-		let password: string = "asdasdasd";
-
-		try {
-			await this.firebase.signInByEmailPassword(email, password); this.isUiEnabled = true;
-
-			this.isUiEnabled = true;
-
-			Toast.makeText(`You are signed in.`, "long").show();
-
-			if (this.location.path() == '/auth') {
-				this.router.navigate(["home"]);
+		dialogs.login("Please type in your email and password", "", "").then( async (r) => {
+			if (r.result == false) {
+				return;
 			}
 
-		} catch (err) {
-			this.isUiEnabled = true;
+			this.isUiEnabled = false;
+			try {
+				await this.firebase.signInByEmailPassword(r.userName, r.password);
 
-			let errMassage: string = JSON.stringify(err);
-			if (errMassage.includes("FirebaseAuthInvalidUserException")) {
-				Toast.makeText(`ERROR: No account with the email: ${email} exists.`, "long").show();
-			} else {
-				Toast.makeText(`ERROR: Some error occured during signing in, please try again.`, "long").show();
+				this.isUiEnabled = true;
+
+				Toast.makeText(`You are signed in.`, "long").show();
+
+				if (this.location.path() == '/auth') {
+					this.router.navigate(["home"]);
+				}
+
+			} catch (err) {
+				this.isUiEnabled = true;
+
+				let errMassage: string = JSON.stringify(err);
+				if (errMassage.includes("FirebaseAuthInvalidUserException")) {
+					Toast.makeText(`ERROR: No account with the email: ${r.userName} exists.`, "long").show();
+				} else {
+					Toast.makeText(`ERROR: Some error occured during signing in, please try again.`, "long").show();
+				}
 			}
-		}
+		});
 	}
 
 	async signUpWithEmailPassword() {
-		this.isUiEnabled = false;
-
-		let email: string = "dupa@o2.pl";
-		let password: string = "asdasdasd";
-
-		try {
-			this.firebase.signUpByEmailPassword(email, password);
-
-			this.isUiEnabled = true;
-
-			Toast.makeText(`You are signed in.`, "long").show();
-
-			if (this.location.path() == '/auth') {
-				this.router.navigate(["home"]);
+		dialogs.login("Please type in your email and password", "", "").then(async (r) => {
+			if (r.result == false) {
+				return;
 			}
 
-		} catch (err) {
-			this.isUiEnabled = true;
+			this.isUiEnabled = false;
+			try {
+				this.firebase.signUpByEmailPassword(r.userName, r.password); 
 
-			let errMassage: string = JSON.stringify(err);
-			if (errMassage.includes("FirebaseAuthUserCollisionException")) {
-				Toast.makeText(`ERROR: Account with the email: ${email} already exists.`, "long").show();
-			} else {
-				Toast.makeText(`ERROR: Some error occured during signing up, please try again.`, "long").show();
+				this.isUiEnabled = true;
+
+				Toast.makeText(`You are signed in.`, "long").show();
+
+				if (this.location.path() == '/auth') {
+					this.router.navigate(["home"]);
+				}
+
+			} catch (err) {
+				this.isUiEnabled = true;
+
+				let errMassage: string = JSON.stringify(err);
+				if (errMassage.includes("FirebaseAuthUserCollisionException")) {
+					Toast.makeText(`ERROR: Account with the email: ${r.userName} already exists.`, "long").show();
+				} else {
+					Toast.makeText(`ERROR: Some error occured during signing up, please try again.`, "long").show();
+				}
 			}
-		}
+		});
 	}
 
 	async signInWithGoogle() {
